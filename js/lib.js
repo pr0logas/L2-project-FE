@@ -64,7 +64,10 @@ function submitForm(el)
 
 	$.getJSON(el.action + '?' + $(el).serialize(), function(data)
 	{
-		response(data);
+		if(data.data.length > 0)
+			getPage('cp.html');
+
+		response("Not found");
 	});
 }
 
