@@ -64,10 +64,17 @@ function submitForm(el)
 
 	$.getJSON(el.action + '?' + $(el).serialize(), function(data)
 	{
-		if(data.data.length > 0)
-			logined(formValue(el, 'account'));
+		if( data.data.SUCCESS ) {
+			response("Success: " + data.data.SUCCESS);
+			return;
+		}
 
-		response("Not found");
+		if(formValue(el, 'account') && data.data.length > 0) {
+			logined(formValue(el, 'account'));
+			return;
+		}
+
+		response("Error: ", data);
 	});
 }
 
@@ -78,10 +85,24 @@ function logined(data)
 	loginMenu();
 }
 
-function response(data) {
+function response(text, data) {
 	$('.page-content .alertResponse').remove();
 	$('.page-content').prepend($("#alertResponse").clone());
-	$('.page-content .alertResponse').html(data);
+	$('.page-content .alertResponse').html(text);
+	$('.page-content .alertResponse').append(getError(data));
+}
+
+function getError(data) 
+{
+	if( data && data.data ) 
+	{
+		var error = "Not found";
+
+		if( data.data.ERROR )
+			error = data.data.ERROR;
+			
+		return error;
+	}
 }
 
 function formValue(el, name) {
