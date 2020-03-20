@@ -194,9 +194,13 @@ button {
 /* Middle
 -----------------------------------------------------------------------------*/
 .page-content {
+  background-image: url('http://www.rpgland.com/wallpapers/lineage2/lineage264.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  font-family: 'Numans', sans-serif;
   min-height: 600px;
   padding: 30px;
-  background: #fafcfe;
   margin-bottom: 50px;
   box-shadow: 0px 0px 20px 0px rgba(125, 157, 185, 0.5);
   line-height: 1.2;
