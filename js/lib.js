@@ -65,14 +65,40 @@ function submitForm(el)
 	$.getJSON(el.action + '?' + $(el).serialize(), function(data)
 	{
 		if(data.data.length > 0)
-			getPage('cp.html');
+			logined(formValue(el, 'account'));
 
 		response("Not found");
 	});
+}
+
+function logined(data) 
+{
+	Cookies.set('account', data);
+	getPage('cp.html');
+	loginMenu();
 }
 
 function response(data) {
 	$('.page-content .alertResponse').remove();
 	$('.page-content').prepend($("#alertResponse").clone());
 	$('.page-content .alertResponse').html(data);
+}
+
+function formValue(el, name) {
+	 return $(el).find('input[name="'+name+'"]').val();
+}
+
+function loginMenu() {
+	var account = Cookies.get('account');
+	$("#login").html("");
+	if(account)
+		$("#login").html('<a href="/cp.html">'+account+'</a>');
+	else
+		$("#login").append( $("#loginMenu").clone() );
+}
+
+function logout() {
+	Cookies.remove('account');
+	getPage('home.html');
+	loginMenu();
 }
