@@ -27,6 +27,7 @@ function putContent(data)
 {
 	removeChilds('main.content', ['media-block','feature-block']);
 	$('main.content').prepend(data);
+	afterUpdate();
 }
 
 function removeChilds(el, leave) 
@@ -51,7 +52,24 @@ function changeOnline(el)
 
 	$(el).html(online + 0 + end);
 
-	$.get(link.online, function( data ) {
-		$(el).html(online + data + end);
+	$.getJSON(link.online, function( data ) {
+		if(data.data)
+			$(el).html(online + data.data.length + end);
 	});
+}
+
+function submitForm(el) 
+{
+	response('Loading...');
+
+	$.getJSON(el.action + '?' + $(el).serialize(), function(data)
+	{
+		response(data);
+	});
+}
+
+function response(data) {
+	$('.page-content .alertResponse').remove();
+	$('.page-content').prepend($("#alertResponse").clone());
+	$('.page-content .alertResponse').html(data);
 }
