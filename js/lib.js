@@ -120,6 +120,12 @@ function loginMenu() {
 
 function logout() {
 	Cookies.remove('account');
-	getPage('home.html');
+	checkLogin();
+}
+
+function checkLogin() {
+	if(Cookies.get('account'))
+		return true;
+	getPage('login.html');
 	loginMenu();
 }
