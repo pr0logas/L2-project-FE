@@ -83,7 +83,10 @@ function response(text, data) {
 
 function getError(data) 
 {
-	if( data && data.data ) 
+	if(!data)
+		return;
+
+	if( data.data ) 
 	{
 		var error = "Not found";
 
