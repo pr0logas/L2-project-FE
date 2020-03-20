@@ -194,7 +194,7 @@ button {
 /* Middle
 -----------------------------------------------------------------------------*/
 .page-content {
-  background-image: url('http://www.rpgland.com/wallpapers/lineage2/lineage264.jpg');
+  background-image: url('../images/lineage264.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
