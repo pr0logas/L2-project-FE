@@ -1,5 +1,8 @@
 ﻿link = {
 	online: 'https://l2-corona-api.adeptio.cc/apiv1/getOnline',
+	getUserInfo: 'https://l2-corona-api.adeptio.cc/apiv1/getUserInfo?account=',
+	getAdeptioUserInfo: 'https://l2-corona-api.adeptio.cc/apiv1/getAdeptioUserInfo?account=',
+	getMoneyCount: 'https://l2-corona-api.adeptio.cc/apiv1/getMoneyCount?charId='
 }
 
 function getPage(el) 
@@ -42,20 +45,6 @@ function removeChilds(el, leave)
 function changeUrl(link) 
 {
 	//window.history.pushState('page2', 'Title', link);
-}
-
-function changeOnline(el) 
-{
-	var online = "<span>Online</span>";
-	var offline = "<span>Offline</span>";
-	var end = " Players";
-
-	$(el).html(online + 0 + end);
-
-	$.getJSON(link.online, function( data ) {
-		if(data.data)
-			$(el).html(online + data.data.length + end);
-	});
 }
 
 function submitForm(el) 
@@ -103,6 +92,9 @@ function getError(data)
 			
 		return error;
 	}
+
+	if( data.message ) 
+		return data.message;
 }
 
 function formValue(el, name) {
@@ -128,4 +120,84 @@ function checkLogin() {
 		return true;
 	getPage('login.html');
 	loginMenu();
+}
+
+function makeTable(table, data) {
+	$(table).html("");
+	$(table).append("<thead></thead>");
+	$(table).append("<tbody></tbody>");
+
+    var thead = $(table).find("thead");
+	var tbody = $(table).find("tbody");
+
+	var columns = {};
+
+	$.each(data, function(i, row) {
+	  var tr = $('<tr>');
+	  $.each(row, function(key, value) {
+	  	columns[key] = key;
+	    $('<td>').html(value).appendTo(tr);
+	  });
+	  tbody.append(tr);
+	});
+
+	  var tr = $('<tr>');
+	  $.each(columns, function(key, value) {
+	    $('<th>').html(value).appendTo(tr);
+	  });
+	  thead.append(tr);
+}
+
+function changeOnline(el) 
+{
+	var online = "<span>Online</span>";
+	var offline = "<span>Offline</span>";
+	var end = " Players";
+
+	$(el).html(online + 0 + end);
+
+	$.getJSON(link.online, function( data ) {
+		if(data.data)
+			$(el).html(online + data.data.length + end);
+	});
+}
+
+function getUserInfo(table) 
+{
+	if(!Cookies.get('account'))
+		return;
+
+	$.getJSON(link.getUserInfo + Cookies.get('account'), function( data ) {
+		if(data.data)
+			makeTable(table, data.data);
+	});
+}
+
+function getAdeptioUserInfo(adena, adeptio) {
+	if(!Cookies.get('account'))
+		return;
+
+	$.getJSON(link.getAdeptioUserInfo + Cookies.get('account'), function( data ) {
+		var balance = 0;
+
+		if(data.data && data.data[0].balance)
+			balance = data.data[0].balance;
+
+		$(adena).html(balance);
+		$(adeptio).html(adenaToAdeptio(balance));
+	});
+}
+
+function getMoneyCount(adeptio, usd) {
+	if(!Cookies.get('account'))
+		return;
+
+	$.getJSON(link.getMoneyCount + Cookies.get('account'), function( data ) {
+		if(!data.data)
+			response("Error: ", data)
+	});
+}
+
+function adenaToAdeptio(count) {
+	return count / 1000;
 }
