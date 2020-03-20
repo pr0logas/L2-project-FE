@@ -2,6 +2,8 @@
 { 
 	afterUpdate();
 
+	loginMenu();
+
 	getPage('home.html');
 
 	changeOnline('#online');
