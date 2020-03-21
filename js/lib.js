@@ -68,11 +68,6 @@ function submitForm(el)
 
 	$.getJSON(getAction(el), function(data)
 	{
-		var resFunc = radioAttr(el.action, 'response');
-
-		if( resFunc )
-			window[resFunc](data);
-
 		if( data.data.SUCCESS ) {
 			response("Success: " + data.data.SUCCESS);
 			return;
@@ -84,6 +79,11 @@ function submitForm(el)
 		}
 
 		response("Error: ", data);
+
+		var resFunc = radioAttr(el.action, 'response');
+
+		if( resFunc )
+			window[resFunc](data);
 	});
 }
 
@@ -143,10 +143,14 @@ function depositAdeptioResponse(data) {
 	var wlt = data.data;
 
 	$("#depositAdeptioWallet").html(wlt);
+	$("#depositAdeptioWalletInput").parent().removeClass("d-none");
+	$("#depositAdeptioWalletInput").val(wlt);
 	$("#depositAdeptioCount").parent().removeClass("d-none");
 	$("#depositAdeptiowlt").val(wlt);
 	$("#depositAdeptio").addClass("d-none");
 	$("#depositAdeptioApproval").removeClass("d-none");
+	
+	response("Your wallet: " + wlt);
 }
 
 function logined(data) 
