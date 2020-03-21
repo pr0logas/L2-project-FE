@@ -20,15 +20,21 @@ function adeptioToUSD(count) {
 	return "$"+usd+" USD or "+btc+" Bitcoin (BTC)";
 }
 
-function getPage(el) 
+function getPage(el,scroll) 
 {
 	var link = getLink(el);
 
 	$.get(link, function( data ) {
 	  putContent(data);
+	  $(el).attr("loading", "false");
 	});
 
 	changeUrl(link);
+
+	if(scroll)
+		$('html, body').animate({
+	        scrollTop: $('#content').offset().top
+	    }, 2000);
 }
 
 function getLink(el) 
