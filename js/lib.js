@@ -2,6 +2,7 @@
 	online: 'https://l2-corona-api.adeptio.cc/apiv1/getOnline',
 	getUserInfo: 'https://l2-corona-api.adeptio.cc/apiv1/getUserInfo?account=',
 	getAdeptioUserInfo: 'https://l2-corona-api.adeptio.cc/apiv1/getAdeptioUserInfo?account=',
+	getUserMoneyCount: 'https://l2-corona-api.adeptio.cc/apiv1/getUserMoneyCount?account=',
 	getMoneyCount: 'https://l2-corona-api.adeptio.cc/apiv1/getMoneyCount?charId='
 }
 
@@ -226,28 +227,33 @@ function getUserInfo(table)
 	});
 }
 
-function getAdeptioUserInfo(adena, adeptio) {
+function getAdeptioUserInfo(adeptio, usd) {
 	if(!Cookies.get('account'))
 		return;
 
 	$.getJSON(link.getAdeptioUserInfo + Cookies.get('account'), function( data ) {
-		var balance = 0;
+		var count = 0;
 
 		if(data.data && data.data[0].balance)
-			balance = data.data[0].balance;
+			count = data.data[0].balance;
 
-		$(adena).html(balance);
-		$(adeptio).html(adenaToAdeptio(balance));
+		$(adeptio).html(count);
+		//$(usd).html(adenaToAdeptio(balance));
 	});
 }
 
-function getMoneyCount(adeptio, usd) {
+function getUserMoneyCount(adena, adeptio) {
 	if(!Cookies.get('account'))
 		return;
 
-	$.getJSON(link.getMoneyCount + Cookies.get('account'), function( data ) {
-		if(!data.data)
-			response("Error: ", data)
+	$.getJSON(link.getUserMoneyCount + Cookies.get('account'), function( data ) {
+		var count = 0;
+		
+		if(data.data)
+			count = data.data;
+			
+		$(adena).html(count);
+		$(adeptio).html(adenaToAdeptio(count));
 	});
 }
 
