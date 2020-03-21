@@ -68,6 +68,11 @@ function submitForm(el)
 
 	$.getJSON(getAction(el), function(data)
 	{
+		var resFunc = radioAttr(el.action, 'response');
+
+		if( resFunc )
+			window[resFunc](data);
+
 		if( data.data.SUCCESS ) {
 			response("Success: " + data.data.SUCCESS);
 			return;
@@ -86,8 +91,8 @@ function getAction(el)
 {
 	var action = el.action;
 
- 	if(radioValue(action))
- 		action = radioValue(action);
+ 	if(radioValue(action, 'clicked'))
+ 		action = radioValue(action, 'clicked');
 
  	return action + '?' + getActionSerialize(el);
 }
@@ -115,6 +120,19 @@ function changeFormValue(name, value)
 	if (name == "token")
 		return btoa(sha1(value));
 	return value;
+}
+
+function depositAdeptioResponse(data) {
+	if(typeof data.data !== 'string')
+		return;
+
+	var wlt = data.data;
+
+	$("#depositAdeptioWallet").html(wlt);
+	$("#depositAdeptioCount").parent().removeClass("d-none");
+	$("#depositAdeptiowlt").val(wlt);
+	$("#depositAdeptio").addClass("d-none");
+	$("#depositAdeptioApproval").removeClass("d-none");
 }
 
 function logined(data) 
@@ -150,12 +168,23 @@ function getError(data)
 		return data.message;
 }
 
-function radioValue(radioNodeList) {
+function radioValue(radioNodeList, attr) {
 	if(typeof radioNodeList === 'string')
 		return false;
 	for (var i = radioNodeList.length - 1; i > -1; i--) {
-		if ($(radioNodeList[i]).attr('clicked')) {
+		if ($(radioNodeList[i]).attr(attr)) {
 			return radioNodeList[i].value;
+		}
+	}
+	return false;
+}
+
+function radioAttr(radioNodeList, attr) {
+	if(typeof radioNodeList === 'string')
+		return false;
+	for (var i = radioNodeList.length - 1; i > -1; i--) {
+		if ($(radioNodeList[i]).attr(attr)) {
+			return $(radioNodeList[i]).attr(attr);
 		}
 	}
 	return false;
