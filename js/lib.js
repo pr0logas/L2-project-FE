@@ -149,8 +149,17 @@ function depositAdeptioResponse(data) {
 	$("#depositAdeptiowlt").val(wlt);
 	$("#depositAdeptio").addClass("d-none");
 	$("#depositAdeptioApproval").removeClass("d-none");
-	
+
 	response("Your wallet: " + wlt);
+}
+
+function withdrawAdeptioResponse(data) {
+	if(typeof data.data !== 'string')
+		return;
+
+	var tx = data.data;
+
+	response("Your tx: " + tx);
 }
 
 function logined(data) 
