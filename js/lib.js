@@ -34,7 +34,7 @@ function getPage(el,scroll)
 	if(scroll)
 		$('html, body').animate({
 	        scrollTop: $('#content').offset().top
-	    }, 2000);
+	    }, 1000);
 }
 
 function getLink(el) 
