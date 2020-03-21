@@ -65,7 +65,7 @@ function changeUrl(link)
 function submitForm(el) 
 {
 	response('Loading...');
-
+console.log(getAction(el));
 	$.getJSON(getAction(el), function(data)
 	{
 		if( data.data.SUCCESS ) {

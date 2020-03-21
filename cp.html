@@ -30,7 +30,8 @@
 
   </div>
 </div>
-	<div class="card border-warning mb-3">
+
+	<div class="card border-warning mb-3 mr-3">
   <div class="card-header"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Your Adeptio (ADE) cryptocurrency</div>
   <div class="card-body text-warning">
     <h5 class="card-title"><span id="getAdeptioUserInfo">?</span> Adeptio (ADE)</h5>
@@ -51,6 +52,28 @@
       </div>
       <input type="hidden" style="display: none;" name="account">
       <button type="submit" class="btn btn-primary">Withdraw to Adeptio wallet</button>
+    </form>
+  </div>
+</div>
+
+  <div class="card border-warning mb-3">
+  <div class="card-header"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Deposit Adeptio (ADE)</div>
+  <div class="card-body text-warning">
+    <h5 class="card-title"><span id="getAdeptioUserInfo">?</span></h5>
+
+    <form>
+      <div class="form-group d-none">
+        <label for="formcount">Count</label>
+        <input type="text" class="form-control" id="formcount" placeholder="0" name="count">
+      </div>
+      <div class="form-group">
+        <label for="formpassword">Password</label>
+        <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
+      </div>
+      <input type="hidden" style="display: none;" name="account">
+      <input type="hidden" style="display: none;" name="wlt">
+      <button type="submit" class="btn btn-primary" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptio">Deposit Adeptio</button>
+      <button type="submit" class="btn btn-primary" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptioApproval">Approval Deposit</button>
     </form>
   </div>
 </div>
