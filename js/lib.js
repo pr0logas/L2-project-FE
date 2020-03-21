@@ -143,10 +143,13 @@ function depositAdeptioResponse(data) {
 	var wlt = data.data;
 
 	$("#depositAdeptioWallet").html(wlt);
+	$("#depositAdeptioWalletInput").parent().removeClass("d-none");
+	$("#depositAdeptioWalletInput").val(wlt);
 	$("#depositAdeptioCount").parent().removeClass("d-none");
 	$("#depositAdeptiowlt").val(wlt);
 	$("#depositAdeptio").addClass("d-none");
 	$("#depositAdeptioApproval").removeClass("d-none");
+	
 	response("Your wallet: " + wlt);
 }
 
