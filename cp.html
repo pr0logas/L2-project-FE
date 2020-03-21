@@ -13,21 +13,15 @@
     <form>
       <div class="form-group">
         <label for="formowner">Select Account</label>
-        <select class="form-control" id="formowner" name="owner">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+        <select class="form-control" id="formowner" name="owner" required></select>
       </div>
       <div class="form-group">
         <label for="formcount">Count</label>
-        <input type="text" class="form-control" id="formcount" placeholder="count" name="count">
+        <input type="text" class="form-control" id="formcount" placeholder="0" name="count" required>
       </div>
       <div class="form-group">
         <label for="formpassword">Password</label>
-        <input type="password" class="form-control" id="formpassword" placeholder="password" name="token">
+        <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
       </div>
       <input type="hidden" style="display: none;" name="account">
       <button type="submit" class="btn btn-primary" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/buyAdena">Buy Adena</button>
@@ -45,15 +39,15 @@
     <form action="https://l2-corona-api.adeptio.cc/apiv1/withdrawAdeptio">
       <div class="form-group">
         <label for="formwlt">Adeptio Wallet</label>
-        <input type="text" class="form-control" id="formwlt" placeholder="wallet" name="wlt">
+        <input type="text" class="form-control" id="formwlt" placeholder="wallet" name="wlt" required>
       </div>
       <div class="form-group">
         <label for="formcount">Count</label>
-        <input type="text" class="form-control" id="formcount" placeholder="count" name="count">
+        <input type="text" class="form-control" id="formcount" placeholder="0" name="count" required>
       </div>
       <div class="form-group">
         <label for="formpassword">Password</label>
-        <input type="password" class="form-control" id="formpassword" placeholder="password" name="token">
+        <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
       </div>
       <input type="hidden" style="display: none;" name="account">
       <button type="submit" class="btn btn-primary">Withdraw to Adeptio wallet</button>
@@ -72,4 +66,5 @@
 getUserInfo("table#getUserInfo")
 getAdeptioUserInfo("#getAdeptioUserInfo", "#getAdeptioUserInfoAdeptio")
 getMoneyCount("#getMoneyCount", "#getMoneyCountUSD")
+changeSelectAccount("select#formowner")
 </script>
