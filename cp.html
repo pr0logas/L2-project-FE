@@ -4,32 +4,60 @@
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 	
-	<div class="card border-warning mb-3" style="max-width: 22rem;max-height: 12rem;">
+	<div class="card border-warning mb-3 mr-3" >
   <div class="card-header"><img src="//l2wiki.com/images/3/34/Item_57.jpg"> Your Adena in Lineage2-Corona</div>
   <div class="card-body text-warning">
     <h5 class="card-title"><span id="getAdeptioUserInfo">?</span> Adena</h5>
     <p class="card-text">~ <span id="getAdeptioUserInfoAdeptio">?</span> Adeptio (ADE)</p>
-<div class="dropdown">
-  <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Select Account
-  </a>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
+    <form>
+      <div class="form-group">
+        <label for="formowner">Select Account</label>
+        <select class="form-control" id="formowner" name="owner">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="formcount">Count</label>
+        <input type="text" class="form-control" id="formcount" placeholder="count" name="count">
+      </div>
+      <div class="form-group">
+        <label for="formpassword">Password</label>
+        <input type="password" class="form-control" id="formpassword" placeholder="password" name="token">
+      </div>
+      <input type="hidden" style="display: none;" name="account">
+      <button type="submit" class="btn btn-primary" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/buyAdena">Buy Adena</button>
+      <button type="submit" class="btn btn-primary" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/sellAdena">Sell Adena</button>
+    </form>
+
   </div>
 </div>
-  </div>
-</div>
-<button type="button" class="btn btn-success">Buy Adena</button>
-<button type="button" class="btn btn-success">Sell Adena</button>
-	<div class="card border-warning mb-3" style="max-width: 22rem;max-height: 12rem;">
+	<div class="card border-warning mb-3">
   <div class="card-header"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Your Adeptio (ADE) cryptocurrency</div>
   <div class="card-body text-warning">
     <h5 class="card-title"><span id="getMoneyCount">?</span> Adeptio (ADE)</h5>
     <p class="card-text">~ <span id="getMoneyCountUSD">$121 USD or 0,001296 Bitcoin (BTC)</span></p>
-    <button type="button" class="btn btn-info">Withdraw to Adeptio wallet</button>
+
+    <form action="https://l2-corona-api.adeptio.cc/apiv1/withdrawAdeptio">
+      <div class="form-group">
+        <label for="formwlt">Adeptio Wallet</label>
+        <input type="text" class="form-control" id="formwlt" placeholder="wallet" name="wlt">
+      </div>
+      <div class="form-group">
+        <label for="formcount">Count</label>
+        <input type="text" class="form-control" id="formcount" placeholder="count" name="count">
+      </div>
+      <div class="form-group">
+        <label for="formpassword">Password</label>
+        <input type="password" class="form-control" id="formpassword" placeholder="password" name="token">
+      </div>
+      <input type="hidden" style="display: none;" name="account">
+      <button type="submit" class="btn btn-primary">Withdraw to Adeptio wallet</button>
+    </form>
   </div>
 </div>
 	</div>
