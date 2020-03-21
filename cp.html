@@ -40,7 +40,7 @@
     <form>
       <div class="form-group">
         <label for="formwlt">Adeptio Wallet</label>
-        <input type="text" class="form-control" id="formwlt" placeholder="wallet" name="wlt" required>
+        <input type="text" class="form-control" id="formwlt" placeholder="ASpLv9c3UTN6SZXYR29iW46xFGjHRRvPWf" name="wlt" required>
       </div>
       <div class="form-group">
         <label for="formcount2">Amount</label>
@@ -51,7 +51,7 @@
         <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
       </div>
       <input type="hidden" style="display: none;" name="account">
-      <button type="submit" class="btn btn-primary" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/withdrawAdeptio" response="withdrawAdeptioResponse">Withdraw to Adeptio wallet</button>
+      <button type="submit" class="btn btn-primary" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/withdrawAdeptio" response="withdrawAdeptioResponse">Withdraw to Adeptio (ADE) wallet</button>
       <button type="submit" class="btn btn-primary" name="action" style="display: none;"> </button>
     </form>
   </div>
@@ -60,11 +60,11 @@
   <div class="card border-warning mb-3">
   <div class="card-header"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Deposit Adeptio (ADE)</div>
   <div class="card-body text-warning">
-    <h5 class="card-title"><span id="depositAdeptioWallet">?</span></h5>
+    <h5 class="card-title"></h5>
 
     <form>
       <div class="form-group d-none">
-        <label for="depositAdeptioWalletInput">Wallet</label>
+        <label for="depositAdeptioWalletInput">Deposit Wallet</label>
         <input type="text" class="form-control" id="depositAdeptioWalletInput" readonly>
       </div>
       <div class="form-group d-none">
@@ -78,7 +78,7 @@
       <input type="hidden" style="display: none;" name="account">
       <input type="hidden" style="display: none;" name="wlt" id="depositAdeptiowlt">
       <button type="submit" class="btn btn-primary" id="depositAdeptio" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptio" response="depositAdeptioResponse">Deposit Adeptio</button>
-      <button type="submit" class="btn btn-primary d-none" id="depositAdeptioApproval" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptioApproval">Approval Deposit</button>
+      <button type="submit" class="btn btn-primary d-none" id="depositAdeptioApproval" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptioApproval">Deposit Approval</button>
     </form>
   </div>
 </div>
