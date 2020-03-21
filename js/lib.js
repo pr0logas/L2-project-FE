@@ -26,6 +26,7 @@ function getPage(el,scroll)
 
 	$.get(link, function( data ) {
 	  putContent(data);
+	  $(el).attr("loading", "false");
 	});
 
 	changeUrl(link);

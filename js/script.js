@@ -12,10 +12,13 @@
 function afterUpdate() 
 {
 	$('a').click(function(event){
+		event.preventDefault();
+		if($(this).attr("loading") === "true")
+			return;
 		var href = $(this).attr('href');
+		$(this).attr("loading", "true");
 		if(href.indexOf('.html') < 0)
 			return;
-		event.preventDefault();
 	    getPage(this,true);
 	});
 
