@@ -156,7 +156,7 @@ function depositAdeptioResponse(data) {
 	$("#depositAdeptio").addClass("d-none");
 	$("#depositAdeptioApproval").removeClass("d-none");
 
-	response("Your wallet: " + wlt);
+	response("Deposit wallet addr: " + wlt);
 }
 
 function withdrawAdeptioResponse(data) {
