@@ -16,8 +16,8 @@
         <select class="form-control" id="formowner" name="owner" required></select>
       </div>
       <div class="form-group">
-        <label for="formcount">Count</label>
-        <input type="text" class="form-control" id="formcount" placeholder="0" name="count" required>
+        <label for="formcount1">Count</label>
+        <input type="text" class="form-control" id="formcount1" placeholder="0" name="count" required>
       </div>
       <div class="form-group">
         <label for="formpassword">Password</label>
@@ -43,8 +43,8 @@
         <input type="text" class="form-control" id="formwlt" placeholder="wallet" name="wlt" required>
       </div>
       <div class="form-group">
-        <label for="formcount">Count</label>
-        <input type="text" class="form-control" id="formcount" placeholder="0" name="count" required>
+        <label for="formcount2">Count</label>
+        <input type="text" class="form-control" id="formcount2" placeholder="0" name="count" required>
       </div>
       <div class="form-group">
         <label for="formpassword">Password</label>
@@ -59,21 +59,21 @@
   <div class="card border-warning mb-3">
   <div class="card-header"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Deposit Adeptio (ADE)</div>
   <div class="card-body text-warning">
-    <h5 class="card-title"><span id="getAdeptioUserInfo">?</span></h5>
+    <h5 class="card-title"><span id="depositAdeptioWallet">?</span></h5>
 
     <form>
       <div class="form-group d-none">
-        <label for="formcount">Count</label>
-        <input type="text" class="form-control" id="formcount" placeholder="0" name="count">
+        <label for="depositAdeptioCount">Count</label>
+        <input type="text" class="form-control" id="depositAdeptioCount" placeholder="0" name="count">
       </div>
       <div class="form-group">
         <label for="formpassword">Password</label>
         <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
       </div>
       <input type="hidden" style="display: none;" name="account">
-      <input type="hidden" style="display: none;" name="wlt">
-      <button type="submit" class="btn btn-primary" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptio">Deposit Adeptio</button>
-      <button type="submit" class="btn btn-primary" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptioApproval">Approval Deposit</button>
+      <input type="hidden" style="display: none;" name="wlt" id="depositAdeptiowlt">
+      <button type="submit" class="btn btn-primary" id="depositAdeptio" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptio" response="depositAdeptioResponse">Deposit Adeptio</button>
+      <button type="submit" class="btn btn-primary d-none" id="depositAdeptioApproval" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptioApproval">Approval Deposit</button>
     </form>
   </div>
 </div>
