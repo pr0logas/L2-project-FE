@@ -303,6 +303,7 @@ function changeSelectAccount(select)
 
 	$.getJSON(link.getUserInfo + Cookies.get('account'), function( data ) 
 	{
+		$(select).html("");
 		if(data.data)
 			$.each(data.data, function(i, row) 
 			{
