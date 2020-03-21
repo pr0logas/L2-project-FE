@@ -229,3 +229,18 @@ function getMoneyCount(adeptio, usd) {
 function adenaToAdeptio(count) {
 	return count / 1000;
 }
+
+function changeSelectAccount(select) 
+{
+	if(!Cookies.get('account'))
+		return;
+
+	$.getJSON(link.getUserInfo + Cookies.get('account'), function( data ) 
+	{
+		if(data.data)
+			$.each(data.data, function(i, row) 
+			{
+			  $(select).append('<option value="'+row.charId+'">'+row.char_name+'</option>');
+			});
+	});
+}
