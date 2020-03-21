@@ -55,7 +55,7 @@ function submitForm(el)
 {
 	response('Loading...');
 
-	$.getJSON(el.action + '?' + $(el).serialize(), function(data)
+	$.getJSON(getAction(el), function(data)
 	{
 		if( data.data.SUCCESS ) {
 			response("Success: " + data.data.SUCCESS);
@@ -69,6 +69,16 @@ function submitForm(el)
 
 		response("Error: ", data);
 	});
+}
+
+function getAction(el) 
+{
+	var action = el.action;
+
+ 	if(radioValue(action))
+ 		action = radioValue(action);
+
+ 	return action + '?' + $(el).serialize();
 }
 
 function logined(data) 
@@ -102,6 +112,17 @@ function getError(data)
 
 	if( data.message ) 
 		return data.message;
+}
+
+function radioValue(radioNodeList) {
+	if(typeof radioNodeList === 'string')
+		return false;
+	for (var i = radioNodeList.length - 1; i > -1; i--) {
+		if ($(radioNodeList[i]).attr('clicked')) {
+			return radioNodeList[i].value;
+		}
+	}
+	return false;
 }
 
 function formValue(el, name) {
