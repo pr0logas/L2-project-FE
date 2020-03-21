@@ -115,7 +115,7 @@ function getActionSerialize(el)
 
 function changeFormValue(name, value) 
 {
-	if (name == "account")
+	if (name == "account" && !value)
 		return Cookies.get('account'); 
 
 	if (name == "token")
