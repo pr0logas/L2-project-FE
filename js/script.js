@@ -16,7 +16,7 @@ function afterUpdate()
 		if(href.indexOf('.html') < 0)
 			return;
 		event.preventDefault();
-	    getPage(this);
+	    getPage(this,true);
 	});
 
 	$('form').submit(function(event){
