@@ -10,6 +10,16 @@ $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownErr
   response(xhr.responseText + ' - ' + ajaxOptions.url);
 });
 
+function adenaToAdeptio(count) {
+	return count / 1000;
+}
+
+function adeptioToUSD(count) {
+	var usd = count / 1000;
+	var btc = count /  10000000;
+	return "$"+usd+" USD or "+btc+" Bitcoin (BTC)";
+}
+
 function getPage(el) 
 {
 	var link = getLink(el);
@@ -238,7 +248,7 @@ function getAdeptioUserInfo(adeptio, usd) {
 			count = data.data[0].balance;
 
 		$(adeptio).html(count);
-		//$(usd).html(adenaToAdeptio(balance));
+		$(usd).html(adeptioToUSD(count));
 	});
 }
 
@@ -255,10 +265,6 @@ function getUserMoneyCount(adena, adeptio) {
 		$(adena).html(count);
 		$(adeptio).html(adenaToAdeptio(count));
 	});
-}
-
-function adenaToAdeptio(count) {
-	return count / 1000;
 }
 
 function changeSelectAccount(select) 
