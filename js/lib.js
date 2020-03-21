@@ -6,7 +6,7 @@
 }
 
 $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownError) {
-  response(thrownError);
+  response(xhr.responseText + ' - ' + ajaxOptions.url);
 });
 
 function getPage(el) 
