@@ -5,6 +5,10 @@
 	getMoneyCount: 'https://l2-corona-api.adeptio.cc/apiv1/getMoneyCount?charId='
 }
 
+$(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownError) {
+  response(thrownError);
+});
+
 function getPage(el) 
 {
 	var link = getLink(el);
