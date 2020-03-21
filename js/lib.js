@@ -117,9 +117,23 @@ function changeFormValue(name, value)
 {
 	if (name == "account")
 		return Cookies.get('account'); 
+
 	if (name == "token")
-		return btoa(sha1(value));
+		return sha1ToBase64(value);
+
 	return value;
+}
+
+function sha1ToBase64(string) 
+{
+	var hash= sha1(string);
+
+	if (hash.length % 2) 
+		hash= "0"+ hash;
+
+	hash = hash.replace(/[a-f0-9][a-f0-9]/g, function (c, i) { return String.fromCharCode(parseInt(c, 16)) });
+
+	return btoa(hash);
 }
 
 function depositAdeptioResponse(data) {
@@ -312,7 +326,7 @@ function changeSelectAccount(select)
 	});
 }
 
-function sha1 (str) {
+function sha1(str) {
   //  discuss at: https://locutus.io/php/sha1/
   // original by: Webtoolkit.info (https://www.webtoolkit.info/)
   // improved by: Michael White (https://getsprink.com)
