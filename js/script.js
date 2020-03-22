@@ -8,7 +8,7 @@
 
 	changeOnline('#online');
 
-	setAdeptioPrice('#adeprice')
+	setAdeptioPrice('.adeprice')
 
 });
 

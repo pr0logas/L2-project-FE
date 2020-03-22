@@ -290,15 +290,17 @@ function changeOnline(el)
 }
 
 function setAdeptioPrice(el) {
+	first = '1000 Adena = '
 
-	$(el).html('?');
+	$(el).html(first);
 
 	$.getJSON(link.getAdeptioPrice, function( data ) {
-		console.log(data)
 		if(data.data)
 			var adeptioPrice = data.data[0];
-			console.log(adeptioPrice)
-			//$(el).html(data.data.length);
+			var bitcoinPrice = data.data[1];
+			total = (adeptioPrice * bitcoinPrice)
+			result = '$ ' + parseFloat(total).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+			$(el).html(first + result);
 	});
 }
 
