@@ -3,7 +3,8 @@
 	getUserInfo: 'https://l2-corona-api.adeptio.cc/apiv1/getUserInfo?account=',
 	getAdeptioUserInfo: 'https://l2-corona-api.adeptio.cc/apiv1/getAdeptioUserInfo?account=',
 	getUserMoneyCount: 'https://l2-corona-api.adeptio.cc/apiv1/getUserMoneyCount?account=',
-	getMoneyCount: 'https://l2-corona-api.adeptio.cc/apiv1/getMoneyCount?charId='
+	getMoneyCount: 'https://l2-corona-api.adeptio.cc/apiv1/getMoneyCount?charId=',
+	getAdeptioPrice : 'https://api.crex24.com/v2/public/tickers?instrument=ADE-BTC,BTC-USD'
 }
 
 $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownError) {
@@ -280,12 +281,23 @@ function changeOnline(el)
 	var offline = "<span>Offline</span>";
 	var end = " Players";
 
-	$(el).html(online + 0 + end);
+	$(el).html(online + '?' + end);
 
 	$.getJSON(link.online, function( data ) {
 		if(data.data)
 			$(el).html(online + data.data.length + end);
 	});
+}
+
+function setAdeptioPrice(el) {
+
+	$(el).html('?');
+
+	//$.getJSON(link.getAdeptioPrice, function( data ) {
+		//console.log(data)
+		//if(data.data)
+			//$(el).html(data.data.length);
+	//});
 }
 
 function getUserInfo(table) 

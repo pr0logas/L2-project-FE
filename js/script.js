@@ -7,6 +7,9 @@
 	getPage('home.html');
 
 	changeOnline('#online');
+
+	setAdeptioPrice('#adeprice')
+
 });
 
 function afterUpdate() 
