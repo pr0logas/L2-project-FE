@@ -191,6 +191,13 @@ button {
   right: 55px;
   top: 114px;
 }
+#countdown {
+  position: absolute;
+  width: 487px;
+  height: 277px;
+  right: 0px;
+  top: 200px;
+}
 /* Middle
 -----------------------------------------------------------------------------*/
 .page-content {

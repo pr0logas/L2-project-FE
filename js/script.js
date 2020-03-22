@@ -8,7 +8,9 @@
 
 	changeOnline('#online');
 
-	setAdeptioPrice('.adeprice')
+	setAdeptioPrice('.adenaPrice')
+
+	startTime('#countdown')
 
 });
 

@@ -515,3 +515,52 @@ function sha1(str) {
   temp = _cvtHex(H0) + _cvtHex(H1) + _cvtHex(H2) + _cvtHex(H3) + _cvtHex(H4)
   return temp.toLowerCase()
 }
+
+
+// Used to show countdown
+
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function startTime() {
+    var today = Math.floor(Date.now() / 1000)
+    var destination = 1585267200000
+	var d = Math.abs(destination - new Date().getTime()) / 1000;                 // delta
+	    var r = {};                                                                // result
+	    var s = {                                                                  // structure
+	        year: 31536000,
+	        month: 2592000,
+	        week: 604800, // uncomment row to ignore
+	        day: 86400,   // feel free to add your own row
+	        hour: 3600,
+	        minute: 60,
+	        second: 1
+	    };
+
+	    Object.keys(s).forEach(function(key){
+	        r[key] = Math.floor(d / s[key]);
+	        d -= r[key] * s[key];
+	    });
+
+	d = JSON.stringify(r['day'])
+	h = JSON.stringify(r['hour'])
+	m = JSON.stringify(r['minute'])
+	s = JSON.stringify(r['second'])
+
+	// for example: {year:0,month:0,week:1,day:2,hour:34,minute:56,second:7}
+
+	if (destination > today) {
+		document.getElementById('countdown').innerHTML = '<button type="button" class="btn btn-danger">' + '<h2>' +  'Grand opening in: ' + d + ' days : ' + h + 'h : ' + m + 'm : ' + s + 's' + '<h2>' + '</button>'
+	} else	{
+		document.getElementById('countdown').innerHTML = '<button type="button" class="btn btn-danger">' + '<h2>' +  'Online since 2020-03-27. Join now!' + '<h2>' + '</button>'
+	}
+    
+
+    let t = setTimeout(function() {
+        startTime()
+    }, 1000);
+}
