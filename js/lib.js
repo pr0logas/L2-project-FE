@@ -28,14 +28,10 @@ function adeptioToUSD(id, count) {
 		var adeptioPrice = data.data[0];
 		var bitcoinPrice = data.data[1];
 		total = (adeptioPrice * bitcoinPrice)
-		console.log(total)
 		usd = parseFloat(count * total).toFixed(4).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-		btc = parseFloat(count *  bitcoinPrice).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-		console.log(usd)
-		$(id).html(total);
+		btc = parseFloat(count *  adeptioPrice).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+		$(id).html('$ ' + usd + ' USD or ' + btc + ' BTC');
 	});
-	//return "$"+usd+" USD or "+btc+" Bitcoin (BTC)";
-	
 }
 
 function getPage(el,scroll) 
