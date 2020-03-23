@@ -104,6 +104,10 @@ function submitForm(el)
 
 		if( resFunc )
 			window[resFunc](data);
+
+		if ( typeof replaceAccountInfo === 'function' ) { 
+			replaceAccountInfo();
+		}
 	});
 }
 
