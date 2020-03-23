@@ -12,13 +12,29 @@ $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownErr
 });
 
 function adenaToAdeptio(count) {
-	return count / 1000;
+	return parseFloat(count / 1000).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
+
+function adena(count) {
+	return parseFloat(count).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+}
+
 
 function adeptioToUSD(count) {
 	var usd = count / 1000;
-	var btc = count /  10000000;
+	var btc = count / 100000000;
+	//$.getJSON(link.getAdeptioPrice, function( data ) {
+	//if(data.data)
+	//	var adeptioPrice = data.data[0];
+	//	var bitcoinPrice = data.data[1];
+	//	total = (adeptioPrice * bitcoinPrice)
+	//	console.log(total)
+	//	usd = parseFloat(count * total).toFixed(4).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+	//	btc = parseFloat(count *  bitcoinPrice).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+	//	console.log(usd)
+	//});
 	return "$"+usd+" USD or "+btc+" Bitcoin (BTC)";
+	
 }
 
 function getPage(el,scroll) 
@@ -325,7 +341,9 @@ function getAdeptioUserInfo(adeptio, usd) {
 		if(data.data && data.data[0].balance)
 			count = data.data[0].balance;
 
-		$(adeptio).html(count);
+		changeFormat = parseFloat(count).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+		$(adeptio).html(changeFormat);
 		$(usd).html(adeptioToUSD(count));
 	});
 }
@@ -339,8 +357,10 @@ function getUserMoneyCount(adena, adeptio) {
 		
 		if(data.data)
 			count = data.data;
-			
-		$(adena).html(count);
+		
+		changeFormat = parseFloat(count).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+		$(adena).html(changeFormat);
 		$(adeptio).html(adenaToAdeptio(count));
 	});
 }
@@ -528,7 +548,7 @@ function checkTime(i) {
 
 function startTime() {
     var today = Math.floor(Date.now() / 1000)
-    var destination = 1585267200000
+    var destination = 1585350000000
 	var d = Math.abs(destination - new Date().getTime()) / 1000;                 // delta
 	    var r = {};                                                                // result
 	    var s = {                                                                  // structure
@@ -556,11 +576,12 @@ function startTime() {
 	if (destination > today) {
 		document.getElementById('countdown').innerHTML = '<button type="button" class="btn btn-danger">' + '<h2>' +  'Grand opening in: ' + d + ' days : ' + h + 'h : ' + m + 'm : ' + s + 's' + '<h2>' + '</button>'
 	} else	{
-		document.getElementById('countdown').innerHTML = '<button type="button" class="btn btn-danger">' + '<h2>' +  'Online since 2020-03-27. Join now!' + '<h2>' + '</button>'
+		document.getElementById('countdown').innerHTML = '<button type="button" class="btn btn-danger" id="countdownbtn">' + '<h2>' +  'Online since 2020-03-27. Join now!' + '<h2>' + '</button>'
 	}
     
 
     let t = setTimeout(function() {
+    	$("#countdownbtn").click()
         startTime()
     }, 1000);
 }
