@@ -20,20 +20,21 @@ function adena(count) {
 }
 
 
-function adeptioToUSD(count) {
+function adeptioToUSD(id, count) {
 	var usd = count / 1000;
 	var btc = count / 100000000;
-	//$.getJSON(link.getAdeptioPrice, function( data ) {
-	//if(data.data)
-	//	var adeptioPrice = data.data[0];
-	//	var bitcoinPrice = data.data[1];
-	//	total = (adeptioPrice * bitcoinPrice)
-	//	console.log(total)
-	//	usd = parseFloat(count * total).toFixed(4).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-	//	btc = parseFloat(count *  bitcoinPrice).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-	//	console.log(usd)
-	//});
-	return "$"+usd+" USD or "+btc+" Bitcoin (BTC)";
+	$.getJSON(link.getAdeptioPrice, function( data ) {
+	if(data.data)
+		var adeptioPrice = data.data[0];
+		var bitcoinPrice = data.data[1];
+		total = (adeptioPrice * bitcoinPrice)
+		console.log(total)
+		usd = parseFloat(count * total).toFixed(4).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+		btc = parseFloat(count *  bitcoinPrice).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+		console.log(usd)
+		$(id).html(total);
+	});
+	//return "$"+usd+" USD or "+btc+" Bitcoin (BTC)";
 	
 }
 
@@ -345,7 +346,7 @@ function getAdeptioUserInfo(adeptio, usd) {
 		changeFormat = parseFloat(count).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
 		$(adeptio).html(changeFormat);
-		$(usd).html(adeptioToUSD(count));
+		adeptioToUSD(usd, count);
 	});
 }
 
