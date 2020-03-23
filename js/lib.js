@@ -21,7 +21,7 @@ function adena(count) {
 
 
 function adeptioToUSD(id, count) {
-	var usd = count / 1000;
+	var usd = count / 10000;
 	var btc = count / 100000000;
 	$.getJSON(link.getAdeptioPrice, function( data ) {
 	if(data.data)
@@ -308,7 +308,7 @@ function changeOnline(el)
 }
 
 function setAdeptioPrice(el) {
-	first = '1000 Adena = '
+	first = '10 000 Adena = '
 
 	$(el).html(first);
 
