@@ -183,7 +183,7 @@ function withdrawAdeptioResponse(data) {
 
 	var tx = data.data;
 
-	response("Your tx: " + tx);
+	response("Your withdrawal is successful. Here is your transaction id: " + tx);
 }
 
 function logined(data) 
