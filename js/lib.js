@@ -15,7 +15,7 @@ $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownErr
 });
 
 function adenaToAdeptio(count) {
-	return parseFloat(count / 1000).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+	return parseFloat(count / 10000).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
 
 function adena(count) {
