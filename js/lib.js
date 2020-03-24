@@ -87,7 +87,7 @@ function changeUrl(link)
 
 function submitForm(el) 
 {
-	response('Loading...');
+	response('Loading, please wait...');
 
 	$(el).find('button').attr('disabled','disabled');
 
@@ -355,7 +355,7 @@ function getAdeptioUserInfo(adeptio, usd) {
 		if(data.data && data.data[0].balance)
 			count = data.data[0].balance;
 
-		changeFormat = parseFloat(count).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+		changeFormat = parseFloat(count).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
 		$(adeptio).html(changeFormat);
 		adeptioToUSD(usd, count);
