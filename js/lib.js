@@ -11,7 +11,7 @@ $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownErr
 	//console.log(event.target);
 	//console.log(event.target.activeElement);
 	$('form').find('button').removeAttr('disabled');
-  response(xhr.responseText + ' - ' + ajaxOptions.url);
+  response(xhr.responseText + ' - ' + btoa(ajaxOptions.url));
 });
 
 function adenaToAdeptio(count) {
