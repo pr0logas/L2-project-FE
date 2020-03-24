@@ -86,28 +86,33 @@ function submitForm(el)
 {
 	response('Loading...');
 
-	$.getJSON(getAction(el), function(data)
-	{
-		if ( typeof replaceAccountInfo === 'function' ) { 
-			replaceAccountInfo();
+	$.ajax({
+		dataType: "json",
+	    url: getAction(el),
+	    timeout: 120 * 1000,
+	    success: function(data)
+		{
+			if ( typeof replaceAccountInfo === 'function' ) { 
+				replaceAccountInfo();
+			}
+			
+			if( data.data.SUCCESS ) {
+				response("Success: " + data.data.SUCCESS);
+				return;
+			}
+
+			if(formValue(el, 'account') && data.data.length > 0) {
+				logined(formValue(el, 'account'));
+				return;
+			}
+
+			response("Error: ", data);
+
+			var resFunc = radioAttr(el.action, 'response');
+
+			if( resFunc )
+				window[resFunc](data);
 		}
-		
-		if( data.data.SUCCESS ) {
-			response("Success: " + data.data.SUCCESS);
-			return;
-		}
-
-		if(formValue(el, 'account') && data.data.length > 0) {
-			logined(formValue(el, 'account'));
-			return;
-		}
-
-		response("Error: ", data);
-
-		var resFunc = radioAttr(el.action, 'response');
-
-		if( resFunc )
-			window[resFunc](data);
 	});
 }
 
