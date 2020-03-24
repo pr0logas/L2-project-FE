@@ -8,6 +8,9 @@
 }
 
 $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownError) {
+	//console.log(event.target);
+	//console.log(event.target.activeElement);
+	$('form').find('button').removeAttr('disabled');
   response(xhr.responseText + ' - ' + ajaxOptions.url);
 });
 
@@ -86,12 +89,16 @@ function submitForm(el)
 {
 	response('Loading...');
 
+	$(el).find('button').attr('disabled','disabled');
+
 	$.ajax({
 		dataType: "json",
 	    url: getAction(el),
 	    timeout: 120 * 1000,
 	    success: function(data)
 		{
+			$(el).find('button').removeAttr('disabled');
+
 			if ( typeof replaceAccountInfo === 'function' ) { 
 				replaceAccountInfo();
 			}
