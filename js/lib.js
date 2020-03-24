@@ -33,7 +33,7 @@ function adeptioToUSD(id, count) {
 		total = (adeptioPrice * bitcoinPrice)
 		usd = parseFloat(count * total).toFixed(4).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 		btc = parseFloat(count *  adeptioPrice).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-		$(id).html('$ ' + usd + ' USD or ' + btc + ' BTC');
+		$(id).html('$ ' + usd + ' USD or ' +  '<img src="images/Bitcoin.png" height="24" width="24">' + ' ' + btc + ' BTC');
 	});
 }
 
