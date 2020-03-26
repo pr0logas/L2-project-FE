@@ -562,7 +562,8 @@ function checkTime(i) {
 
 function startTime() {
     var today = Math.floor(Date.now() / 1000)
-    var destination = 1585350000000
+    var destination = 1585332000000
+    
 	var d = Math.abs(destination - new Date().getTime()) / 1000;                 // delta
 	    var r = {};                                                                // result
 	    var s = {                                                                  // structure
