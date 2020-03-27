@@ -588,11 +588,11 @@ function startTime() {
 
 	// for example: {year:0,month:0,week:1,day:2,hour:34,minute:56,second:7}
 
-	if (destination > today) {
-		document.getElementById('countdown').innerHTML = '<button type="button" class="btn btn-danger">' + '<h2>' +  'Grand opening in: ' + d + ' days : ' + h + 'h : ' + m + 'm : ' + s + 's' + '<h2>' + '</button>'
-	} else	{
+	//if (destination > today) {
+	//	document.getElementById('countdown').innerHTML = '<button type="button" class="btn btn-danger">' + '<h2>' +  'Grand opening in: ' + d + ' days : ' + h + 'h : ' + m + 'm : ' + s + 's' + '<h2>' + '</button>'
+	//} else	{
 		document.getElementById('countdown').innerHTML = '<button type="button" class="btn btn-danger" id="countdownbtn">' + '<h2>' +  'Online since 2020-03-27. Join now!' + '<h2>' + '</button>'
-	}
+	//}
     
 
     let t = setTimeout(function() {
