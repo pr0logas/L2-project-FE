@@ -310,13 +310,13 @@ function changeOnline(el)
 	var offline = "<span>Offline</span>";
 	var end = " Players";
 
-	$(el).html(online + '159' + end);
-	//$(el).html(online + '?' + end);
+	//$(el).html(online + '159' + end);
+	$(el).html(online + '?' + end);
 
-	//$.getJSON(link.online, function( data ) {
-	//	if(data.data)
-	//		$(el).html(online + data.data.length + end);
-	//});
+	$.getJSON(link.online, function( data ) {
+		if(data.data)
+			$(el).html(online + data.data.length + end);
+	});
 }
 
 function setAdeptioPrice(el) {
