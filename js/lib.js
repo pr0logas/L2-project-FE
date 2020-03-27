@@ -310,7 +310,7 @@ function changeOnline(el)
 	var offline = "<span>Offline</span>";
 	var end = " Players";
 
-	$(el).html(online + 'Registration open');
+	$(el).html(online + '159' + end);
 	//$(el).html(online + '?' + end);
 
 	//$.getJSON(link.online, function( data ) {
