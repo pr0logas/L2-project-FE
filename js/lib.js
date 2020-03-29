@@ -315,7 +315,7 @@ function changeOnline(el)
 
 	$.getJSON(link.online, function( data ) {
 		if(data.data)
-			$(el).html(online + (data.data.length * 2 + 1) + end);
+			$(el).html(online + (data.data.length + 7 + 1) + end);
 	});
 }
 
