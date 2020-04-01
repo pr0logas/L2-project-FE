@@ -1,0 +1,119 @@
+			<h1 class="text-center pb-3">Get started</h1>
+
+			<div class="page-content box-clear smaller">
+			</div>
+
+				<div class="half-box">
+	
+					<div class="accordion" id="accordionExample">
+					  <div class="card bg-primary">
+					    <div class="card-header" id="headingOne">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					          1. Download Client
+					        </button>
+					      </h2>
+					    </div>
+
+					    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+					      <div class="card-body bg-dark">
+
+								<a href="https://drive.google.com/uc?id=1zpUS9xIINo9-B3-QtPPRdMSPnwU6LgkF&export=download" class="btn btn-lg btn-danger mt-3 mb-3" target="_blank">Download</a>
+
+								Windows, 4GB, .rar
+
+					      </div>
+					    </div>
+					  </div>
+					  <div class="card bg-primary">
+					    <div class="card-header" id="headingTwo">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link text-white collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					          2. Create new account
+					        </button>
+					      </h2>
+					    </div>
+					    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+					      <div class="card-body bg-dark text-center">
+
+
+								<h5>Create new account</h5>
+
+								<form action="https://l2-corona-api.adeptio.cc/apiv1/register">
+									<div class="input-group form-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-user"></i></span>
+										</div>
+										<input type="text" class="form-control" placeholder="username" name="user" required>
+									</div>
+									<div class="input-group form-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-envelope"></i></span>
+										</div>
+										<input type="email" class="form-control" placeholder="email" name="email" required>
+									</div>
+									<div class="input-group form-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-key"></i></span>
+										</div>
+										<input type="password" class="form-control" placeholder="password" name="passw" required>
+									</div>
+									<div class="form-group">
+										<button type="submit" class="btn btn-danger login_btn">Create account</button>
+									</div>
+								</form>
+
+					      </div>
+					    </div>
+					  </div>
+					  <div class="card bg-primary">
+					    <div class="card-header" id="headingThree">
+					      <h2 class="mb-0">
+					        <button class="btn btn-link text-white collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+					          3. Access Player Dashboard
+					        </button>
+					      </h2>
+					    </div>
+					    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+					      <div class="card-body bg-dark text-center">
+
+								<h5>Access Player Dashboard</h5>
+
+								<form action="https://l2-corona-api.adeptio.cc/apiv1/getUserInfo">
+									<div class="input-group form-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-user"></i></span>
+										</div>
+										<input type="text" class="form-control" placeholder="username" name="account" required>
+										
+									</div>
+									<div class="input-group form-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-key"></i></span>
+										</div>
+										<input type="password" class="form-control" placeholder="password">
+									</div>
+									<div class="form-group">
+										<button  type="submit" class="btn btn-danger login_btn">Login
+										</button>
+									</div>
+								</form>
+
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				
+				</div>
+<script type="text/javascript">
+$('[data-toggle="collapse"]').on('click',function(e){
+    if ( $(this).parents('.accordion').find('.collapse.show') ){
+        var idx = $(this).index('[data-toggle="collapse"]');
+        if (idx == $('.collapse.show').index('.collapse')) {
+            // prevent collapse
+            e.stopPropagation();
+            e.preventDefault();
+        }
+    }
+});
+</script>

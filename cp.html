@@ -1,10 +1,33 @@
 <script>checkLogin()</script>
 <h1 class="text-center pb-3">Player Dashboard</h1>
+  <div class="bg-dark border border-secondary rounded p-3">
+    <div class="row">
+
+    <div class="col-6">
+      <button type="button" class="btn btn-danger" onclick="logout()">Logout</button>
+    </div>
+    <div class="col-6">
+     <h3 class="d-inline-block text-uppercase mr-2 mb-0"> <a class="text-white" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
+          Assets
+        </a></h3>
+        <h3 class="d-inline-block text-uppercase ml-2 mb-0"><a class="text-white collapsed" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="true" aria-controls="collapseExample2">
+    Player Stats
+  </a></h3>
+    </div>
+  </div>
+
+  </div>
 			<div class="page-content">
+
+
+<div id="accordionExample">
+
+<div class="collapse show" id="collapseExample" data-parent="#accordionExample">
+
 <div class="container">
-	<div class="d-flex justify-content-center h-100">
-	
-	<div class="card border-dark bg-dark mb-3 mr-3" >
+  <div class="d-flex justify-content-center h-100">
+  
+  <div class="card border-dark bg-dark mb-3 mr-3" >
   <div class="card-header"><img src="//l2wiki.com/images/3/34/Item_57.jpg"> Your Adena in L2-Corona</div>
   <div class="card-body">
     <h5 class="card-title"><span id="getUserMoneyCount">?</span> Adena</h5>
@@ -31,7 +54,7 @@
   </div>
 </div>
 
-	<div class="card border-dark bg-dark mb-3 mr-3">
+  <div class="card border-dark bg-dark mb-3 mr-3">
   <div class="card-header"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Your Adeptio (ADE) cryptocurrency</div>
   <div class="card-body ">
     <h5 class="card-title"><span id="getAdeptioUserInfo">?</span> Adeptio (ADE)</h5>
@@ -82,15 +105,35 @@
     </form>
   </div>
 </div>
-	</div>
+  </div>
 </div>
 
-<table id="getUserInfo" class="table table-sm"></table>
+</div>
 
-<button type="button" class="btn btn-danger" onclick="logout()">Logout</button>
+<div class="collapse" id="collapseExample2" data-parent="#accordionExample">
+  <div class="">
+    <table id="getUserInfo" class="table table-sm"></table>
+  </div>
+</div>
+
+</div>
+
+
+
+
 			</div>
 			
 <script>
+$('[data-toggle="collapse"]').on('click',function(e){
+    if ( $(this).parents('.accordion').find('.collapse.show') ){
+        var idx = $(this).index('[data-toggle="collapse"]');
+        if (idx == $('.collapse.show').index('.collapse')) {
+            // prevent collapse
+            e.stopPropagation();
+            e.preventDefault();
+        }
+    }
+});
 function replaceAccountInfo() {
   getUserInfo("table#getUserInfo")
   getUserMoneyCount("#getUserMoneyCount", "#getUserMoneyCountAdeptio")

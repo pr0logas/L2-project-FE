@@ -638,3 +638,14 @@ button {
 .box-h-200 {
   height: 200px;
 }
+
+.box-clear {
+  padding: 0 !important;
+  margin: 0 auto !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+a.collapsed {
+  color: #6c757d !important;
+}
