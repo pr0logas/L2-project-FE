@@ -8,7 +8,6 @@
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
-
 	  gtag('config', 'UA-147346387-1');
 	</script>
 	<!--Bootsrap 4 CDN-->
@@ -25,14 +24,13 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="body-general">
 	<div class="top-panel">
 		<div class="logo">
-			<a href=""><img src="images/logo.png" alt=""></a>
+			<h4><a href="">Adeptio || Lineage</a></h4>
 		</div>
 		<div class="menu">
 			<ul>
-				<li class="active"><a href="/home.html">Home</a></li>
 				<li><a href="/download.html">Download files</a></li>
 				<li><a href="/rates.html">Server Rates</a></li>
 				<li><a href="https://wiki.adeptio.cc/books/l2-corona-how-in-game-economic-works" target="_blank" >How it works?</a></li>
@@ -41,48 +39,7 @@
 		<div id="login" class="login"></div>
 	</div><!-- top-panel -->
 	<div class="wrapper">
-
-		<header class="header">
-			<div class="status-block online">
-				<div id="online"></div>
-				<div class="adenaPrice">
-				</div>
-			</div><!-- status-block -->
-			<div class="era-text">
-			<div id="countdown">
-			</div><!-- era-text -->
-
-		</header><!-- .header-->
 		<main class="content" id="content">
-			<div class="media-block">
-				<div class="art-block">
-					<div class="media-title">Artwork <a href="">+</a></div>
-					<p><a href=""><img src="images/art-img-1.jpg" alt=""></a></p>
-					<p><a href=""><img src="images/art-img-2.jpg" alt=""></a></p>
-				</div>
-				<div class="gameplay-block">
-					<div class="media-title">Gameplay <a href="">+</a></div>
-					<p><a href=""><img src="images/gameplay-img-1.jpg" alt=""></a></p>
-					<p><a href=""><img src="images/gameplay-img-2.jpg" alt=""></a></p>
-				</div>
-			</div><!-- art-block -->
-			<div class="feature-block">
-				<h1><span>Server <br> <b>Features</b></span> </h1>
-				<div id="carousel" class="carousel">
-				    <button class="arrow prev"></button>
-				    <div class="gallery">
-				      <ul class="images">
-				        <li><img src="images/f-slider-img.jpg" alt=""></li>
-				        <li><img src="images/f-slider-img.jpg" alt=""></li>
-				        <li><img src="images/f-slider-img.jpg" alt=""></li>
-				        <li><img src="images/f-slider-img.jpg" alt=""></li>
-				        <li><img src="images/f-slider-img.jpg" alt=""></li>
-				        <li><img src="images/f-slider-img.jpg" alt=""></li>
-				      </ul>
-				    </div>
-				    <button class="arrow next"></button>
-			  	</div>
-			</div><!-- feature-block -->
 		</main><!-- .content -->
 		<footer class="footer" style="box-sizing: content-box">
 			<div class="f-menu">
@@ -95,12 +52,8 @@
 				</ul>
 			</div>
 			<div class="f-info">
-				<div class="f-logo">
-					<a href=""><img src="images/f-logo.png" alt=""></a>
-				</div>
 				<div class="f-text">
-					Copyright © 2020. All rights reserved. <br>
-					It's only a Beta Server. Be careful with your funds. <br>
+					Adeptio Lineage High Five server. Copyright © 2020. All rights reserved.
 				</div>
 			</div>
 			<a style="position: fixed; margin-left: 0px; margin-bottom: 50px; z-index:99999; bottom: 350px; left: 0px;" href='https://l2votes.com/votes.php?sid=129' target='_blank' title='l2votes.com'>
@@ -121,8 +74,8 @@
 
 	</div><!-- .wrapper -->
 	<div style="display: none;">
-		<div id="alertResponse" class="alert alert-primary alertResponse" role="alert"></div>
-		<span id="loginMenu"><a href="/login.html">Login</a> or <a href="/register.html" class="sign">Sign Up</a></span>
+		<div id="alertResponse" class="alert alert-danger alertResponse" role="alert"></div>
+		<span id="loginMenu"><a href="/login.html">Login</a></span>
 	</div>
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	 <script type="application/javascript" src="/js/js.cookie.min.js"></script>
@@ -132,24 +85,6 @@
 	<script src="js/slider.js"></script>
 	<script src="js/lib.js"></script>
 	<script>
-	    var width = 714; 
-	    var count = 1; 
-
-	    var carousel = document.getElementById('carousel');
-	    var list = carousel.querySelector('ul');
-	    var listElems = carousel.querySelectorAll('li');
-
-	    var position = 0;
-
-	    carousel.querySelector('.prev').onclick = function() {
-	      position = Math.min(position + width * count, 0)
-	      list.style.marginLeft = position + 'px';
-	    };
-
-	    carousel.querySelector('.next').onclick = function() {
-	      position = Math.max(position - width * count, -width * (listElems.length - count));
-	      list.style.marginLeft = position + 'px';
-	    };
   	</script>
 	<script src="js/script.js"></script>
 </body>

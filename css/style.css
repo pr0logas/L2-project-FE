@@ -1,12 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 body {
   width: 100%;
-  background: url(../images/top-bg.jpg) center top no-repeat, url(../images/bottom-bg.jpg) center bottom no-repeat;
-  background-color: #fefefe;
+  background-color: #10161E !important;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
-  color: #545964;
+  color: #ffffff !important;
   line-height: 1;
+}
+.body-general {
+  background: url(../images/bg-head.png) center top no-repeat, url(../images/bg-foot.jpg) center bottom no-repeat;
+  background-size: 100% auto;
+}
+.body-dark {
+  background: url(../images/bg-dark.png) center top no-repeat, url(../images/bg-foot.jpg) center bottom no-repeat;
+  background-size: 100% auto;
 }
 a {
   transition: all 0.3s ease;
@@ -31,7 +38,7 @@ h3 {
 }
 h1 {
   font-size: 30px;
-  text-transform: uppercase;
+
   text-align: center;
   margin-bottom: 50px;
 }
@@ -70,8 +77,6 @@ h3 {
 input,
 textarea {
   background: none;
-  outline: 1px solid #b8c6d4;
-  border: 1px solid #dddfe1;
   color: #545964;
   padding: 5px 10px;
   position: relative;
@@ -79,7 +84,6 @@ textarea {
 }
 button {
   transition: all 0.3s ease;
-  background: linear-gradient(to bottom, #86a9c1, #40607d);
   cursor: pointer;
   border: 1px solid #5d83a2;
   color: #fcfdfd;
@@ -112,6 +116,9 @@ button {
   height: 660px;
   position: relative;
 }
+.head-header {
+  height: 660px;
+}
 .header-page {
   height: 370px;
 }
@@ -127,16 +134,7 @@ button {
 }
 .top-panel a {
   text-decoration: none;
-  color: #bfd6e8;
-}
-.top-panel:after {
-  content: "";
-  height: 1px;
-  width: 100%;
-  position: absolute;
-  top: 102px;
-  background: rgba(141, 162, 178, 0.6);
-  left: 0px;
+  color: #fff;
 }
 .menu li {
   display: inline-block;
@@ -160,9 +158,6 @@ button {
   color: #fafcfd !important;
 }
 .status-block {
-  position: absolute;
-  right: 0px;
-  top: 10px;
   font-size: 13px;
   color: #fafcfe;
   line-height: 1.4;
@@ -173,11 +168,11 @@ button {
   font-size: 12px;
 }
 .status-block.online {
-  background: url(../images/online-server.png) left no-repeat;
+
   padding: 15px 0px 15px 73px;
 }
 .status-block.offline {
-  background: url(../images/offline-server.png) left no-repeat;
+
   padding: 15px 0px 15px 73px;
 }
 .status-block.offline span {
@@ -201,15 +196,14 @@ button {
 /* Middle
 -----------------------------------------------------------------------------*/
 .page-content {
-  background-image: url('../images/lineage264.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: #171921;
   height: 100%;
   font-family: 'Numans', sans-serif;
-  min-height: 600px;
   padding: 30px;
   margin-bottom: 50px;
-  box-shadow: 0px 0px 20px 0px rgba(125, 157, 185, 0.5);
+  border: 1px solid #3C3C3C;
+  border-radius: 5px;
+  opacity: 1;
   line-height: 1.2;
 }
 .page-content img {
@@ -217,6 +211,11 @@ button {
 }
 .page-content h2 {
   text-align: center;
+}
+.page-content.smaller {
+  width: 50%;
+  margin: 0 auto;
+   margin-bottom: 50px;
 }
 .block-info {
   display: flex;
@@ -579,8 +578,7 @@ button {
 /* Footer
 -----------------------------------------------------------------------------*/
 .footer {
-  height: 250px;
-  padding: 200px 150px 0px 150px;
+  padding: 200px 150px 30px 150px;
 }
 .f-menu {
   border-bottom: 1px solid #8fa1b0;
@@ -611,3 +609,32 @@ button {
   line-height: 1.2;
 }
 /*# sourceMappingURL=style.css.map */
+
+
+.no-bg {
+    background: transparent !important;
+}
+
+.bg-brown {
+  background-color: #2a2028 !important;
+  border: 1px solid #BC6640;
+}
+
+.bg-brown-light {
+  background-color: #8D320A !important;
+  border: 1px solid #BC6640;
+}
+
+.half-box {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.perc75-box {
+    width: 75%;
+  margin: 0 auto;
+}
+
+.box-h-200 {
+  height: 200px;
+}

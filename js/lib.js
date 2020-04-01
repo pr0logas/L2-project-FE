@@ -37,21 +37,34 @@ function adeptioToUSD(id, count) {
 	});
 }
 
+function changeBackground(link) 
+{
+	if(link === 'home.html' || link === '' || link === '/') 
+	{
+		$("body").removeClass("body-dark");
+		$("body").addClass("body-general");
+		return;
+	}
+	$("body").removeClass("body-general");
+	$("body").addClass("body-dark");
+}
+
 function getPage(el,scroll) 
 {
 	var link = getLink(el);
 
 	$.get(link, function( data ) {
 	  putContent(data);
+	  changeBackground(link);
 	  $(el).attr("loading", "false");
 	});
 
 	changeUrl(link);
 
-	if(scroll)
+	/*if(scroll)
 		$('html, body').animate({
 	        scrollTop: $('#content').offset().top
-	    }, 1000);
+	    }, 1000);*/
 }
 
 function getLink(el) 
@@ -66,7 +79,7 @@ function getLink(el)
 
 function putContent(data) 
 {
-	removeChilds('main.content', ['media-block','feature-block']);
+	removeChilds('main.content', ['media-block']);
 	$('main.content').prepend(data);
 	afterUpdate();
 }
@@ -306,8 +319,8 @@ function makeTable(table, data) {
 
 function changeOnline(el) 
 {
-	var online = "<span>Online</span>";
-	var offline = "<span>Offline</span>";
+	var online = "<span class='text-success'>Online: </span>";
+	var offline = "<span>Offline: </span>";
 	var end = " Players";
 
 	//$(el).html(online + '159' + end);
@@ -591,12 +604,12 @@ function startTime() {
 	//if (destination > today) {
 	//	document.getElementById('countdown').innerHTML = '<button type="button" class="btn btn-danger">' + '<h2>' +  'Grand opening in: ' + d + ' days : ' + h + 'h : ' + m + 'm : ' + s + 's' + '<h2>' + '</button>'
 	//} else	{
-		document.getElementById('countdown').innerHTML = '<button type="button" class="btn btn-danger" id="countdownbtn">' + '<h2>' +  'Online since 2020-03-27. Join now!' + '<h2>' + '</button>'
+		//document.getElementById('countdown').innerHTML = '<button type="button" class="btn btn-danger" id="countdownbtn">' + '<h2>' +  'Online since 2020-03-27. Join now!' + '<h2>' + '</button>'
 	//}
     
 
-    let t = setTimeout(function() {
+  /*  let t = setTimeout(function() {
     	$("#countdownbtn").click()
         startTime()
-    }, 1000);
+    }, 1000);*/
 }
