@@ -22,7 +22,7 @@
 
 <div id="accordionExample">
 
-<div class="collapse show" id="collapseExample" data-parent="#accordionExample">
+<div class="collapse show d-none" id="collapseExample" data-parent="#accordionExample">
 
 <div class="container">
   <div class="d-flex justify-content-center h-100">
@@ -119,6 +119,10 @@
 </div>
 
 
+  <div id="newOneDiv" class="d-none text-center">
+    <h2 class="text-primary">Congrats!</h2>
+    <p>You are ready for Adeptio Lineage journey</p>
+  </div>
 
 
 			</div>
@@ -135,6 +139,12 @@ $('[data-toggle="collapse"]').on('click',function(e){
     }
 });
 function replaceAccountInfo() {
+  if(checkNewOne()) 
+  {
+    $("#newOneDiv").removeClass("d-none");
+    return;
+  }
+  $("#collapseExample").removeClass("d-none");
   getUserInfo("table#getUserInfo")
   getUserMoneyCount("#getUserMoneyCount", "#getUserMoneyCountAdeptio")
   getAdeptioUserInfo("#getAdeptioUserInfo", "#getAdeptioUserInfoUSD")

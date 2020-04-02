@@ -116,13 +116,15 @@ function submitForm(el)
 				replaceAccountInfo();
 			}
 			
-			if( data.data.SUCCESS ) {
+			if( data.data && data.data.SUCCESS ) {
 				response("Success: " + data.data.SUCCESS);
 				return;
 			}
 
-			if(formValue(el, 'account') && data.data.length > 0) {
-				logined(formValue(el, 'account'));
+			//if( getAction(el).indexOf("getUserInfo") >= 0 && data.data )
+
+			if(formValue(el, 'account') && ((data.data && data.data.length >= 0) || data.WARN)) {
+				logined(formValue(el, 'account'), data.WARN);
 				return;
 			}
 
@@ -211,9 +213,10 @@ function withdrawAdeptioResponse(data) {
 	response("Your withdrawal is successful. Here is your transaction id: " + tx);
 }
 
-function logined(data) 
+function logined(data, newone) 
 {
-	Cookies.set('account', data);
+	Cookies.set('account', data)
+	Cookies.set('newone', newone);
 	getPage('cp.html');
 	loginMenu();
 }
@@ -230,18 +233,25 @@ function getError(data)
 	if(!data)
 		return;
 
-	if( data.data ) 
-	{
-		var error = "Not found";
-
-		if( data.data.ERROR )
-			error = data.data.ERROR;
-			
-		return error;
-	}
-
 	if( data.message ) 
 		return data.message;
+
+	var error = "";
+
+	if( data.WARN ) 
+		error = data.WARN;
+
+	if( data.ERROR ) 
+		error = data.ERROR;
+
+	if( data.data && data.data.ERROR )
+		error = data.data.ERROR;
+
+	if( error ) 
+		return error;
+
+	if( data.data ) 
+		return "Not found";
 }
 
 function radioValue(radioNodeList, attr) {
@@ -289,6 +299,12 @@ function checkLogin() {
 		return true;
 	getPage('login.html');
 	loginMenu();
+}
+
+function checkNewOne() {
+	if(Cookies.get('newone')!=='undefined')
+		return true;
+	return false;
 }
 
 function makeTable(table, data) {
