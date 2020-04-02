@@ -332,18 +332,13 @@ function changeOnline(el)
 	});
 }
 
-function setAdeptioPrice(el) {
-	first = '10 000 Adena = '
-
-	$(el).html(first);
-
+function getAdeptioPriceCall(callback) 
+{
 	$.getJSON(link.getAdeptioPrice, function( data ) {
 		if(data.data)
 			var adeptioPrice = data.data[0];
 			var bitcoinPrice = data.data[1];
-			total = (adeptioPrice * bitcoinPrice)
-			result = '$ ' + parseFloat(total).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-			$(el).html(first + result);
+			callback(adeptioPrice, bitcoinPrice);
 	});
 }
 
@@ -406,6 +401,12 @@ function changeSelectAccount(select)
 			  $(select).append('<option value="'+row.charId+'">'+row.char_name+'</option>');
 			});
 	});
+}
+
+function numberWithSpaces(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return parts.join(".");
 }
 
 function sha1(str) {

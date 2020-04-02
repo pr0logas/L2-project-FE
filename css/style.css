@@ -80,7 +80,6 @@ textarea {
   color: #545964;
   padding: 5px 10px;
   position: relative;
-  box-shadow: 0px 0px 10px 0px rgba(125, 157, 185, 0.4);
 }
 button {
   transition: all 0.3s ease;
@@ -625,6 +624,10 @@ button {
   border: 1px solid #BC6640;
 }
 
+.bg-brown-dark {
+  background-color: #1C140F !important;
+}
+
 .half-box {
   width: 50%;
   margin: 0 auto;
@@ -648,4 +651,42 @@ button {
 
 a.collapsed {
   color: #6c757d !important;
+}
+
+.custom-range::-webkit-slider-thumb {
+  background: #BC6640 !important;
+}
+
+.custom-range::-moz-range-thumb {
+  background: #BC6640 !important;
+}
+
+.custom-range::-ms-thumb {
+  background: #BC6640 !important;
+}
+
+.custom-range::-webkit-slider-runnable-track {
+
+}
+.custom-range:focus::-webkit-slider-runnable-track {
+
+}
+
+.custom-range::-ms-track {
+
+}
+.custom-range::-moz-range-track {
+  background: #6c757d !important;
+}
+.custom-range::-ms-fill-lower {
+
+}
+.custom-range:focus::-ms-fill-lower {
+  background: #6c757d !important;
+}
+.custom-range::-ms-fill-upper {
+  background: #6c757d !important;
+}
+.custom-range:focus::-ms-fill-upper {
+
 }

@@ -1,27 +1,66 @@
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-	<section class="jumbotron no-bg text-center">
+	<section class="jumbotron no-bg ">
 	    <div class="container">
 
 	      <h1 class="display-3">Experience Lineage world in new a way</h1>
 	      <p class="lead">
-	      	<h3 class="font-weight-bold">Earn while playing</h3>
+	      	<h3 class="font-weight-bold text-center">Earn while playing</h3>
 	      </p>
 		      
 			<div class="perc75-box mt-5">
 		      <div class="card-header half-box bg-brown-light pt-2 pb-2 ">
 		        <h6 id="online" class="my-0 font-weight-bold"></h6>
 		      </div>
-		      <div class="card-body bg-brown rounded">
-		        <h1 class="card-title pricing-card-title">Trade your Adena into Bitcoin / Dollar</h1>
-		        <div class="adenaPrice"></div>
-		        <div class="text-muted mt-3">
+		      <div class="card-body bg-brown rounded p-0">
+
+		      	<div class="p-3 pt-4 pl-4 pr-4">
+
+			        <h4 class="card-title pricing-card-title text-left">Trade your Adena into Bitcoin / Dollar</h4>
+
+			        <input type="range" class="custom-range"  min="10000" max="1000000000" id="tradeAdenaRange" value="100000000">
+
+				  	<div class="row text-muted">
+				  		<div class="col-6">
+				  			10 000
+				  		</div>
+				  		<div class="col-6 text-right">
+				  			1 000 000 000+
+				  		</div>
+				  	</div>
+
+				 </div>
+		        <div class="p-3 pb-4 pl-4 pr-4 bg-brown-dark">
+
+				  	<div class="row">
+				  		<div class="col-3">
+				  			<img src="//l2wiki.com/images/3/34/Item_57.jpg">
+				  			 Adena
+				  			<div id="AdenaRange">
+				  				
+				  			</div>
+				  		</div>
+				  		<div class="col-3">
+			  				<img src="images/Bitcoin.png" width="24" height="24">
+			  				 Bitcoin
+			  				 <div id="BitcoinRange">
+				  			</div>
+				  		</div>
+
+				  		<div class="col-6 text-right">
+				  			<a href="/getstarted.html" class="btn btn-lg btn-danger mt-3">Get started</a>
+				  		</div>
+				  	</div>
+
+				  </div>
+
+		      </div>
+		    </div>
+
+		        <div class=" mt-3 text-center">
 					Actual price may change due Bitcoin and Adeptio Coin market prices. 
 					<br>
 					You can sell or buy Adena through your Player Dashboard.
 				</div>
-		        <a href="/getstarted.html" class="btn btn-lg btn-danger mt-3">Get started</a>
-		      </div>
-		    </div>
 
 	    </div>
   </section>
@@ -92,3 +131,27 @@ The player has to collect, build, do quests and prove his skills.
 
   	<div>Earn while playing</div>
 </div><!-- feature-block -->
+
+<script type="text/javascript">
+	getAdeptioPriceCall(function(adeptioPrice, bitcoinPrice)
+	{
+	    setAdenaRangeBitcoin($('#tradeAdenaRange').val(), adeptioPrice, bitcoinPrice);
+
+		$('#tradeAdenaRange').on('change mousemove', function () 
+		{
+	    	setAdenaRangeBitcoin($(this).val(), adeptioPrice, bitcoinPrice);
+		});
+	});
+
+	function setAdenaRangeBitcoin(adena, adeptioPrice, bitcoinPrice) 
+	{
+		var adeptio = adena / 10000;
+		var bitcoin = parseFloat(adeptio * adeptioPrice).toFixed(6);
+		var dollar = parseFloat(bitcoin * bitcoinPrice).toFixed(3);
+		var adena = numberWithSpaces(adena);
+		adeptio = numberWithSpaces(parseFloat(adeptio).toFixed(0));
+
+		$("#AdenaRange").html(adena + "<br>" + adeptio + " Adeptio"); 
+	    $("#BitcoinRange").html(bitcoin + "<br> $" + dollar + " USD");
+	}
+</script>
