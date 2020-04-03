@@ -321,16 +321,47 @@ function makeTable(table, data) {
 	  var tr = $('<tr>');
 	  $.each(row, function(key, value) {
 	  	columns[key] = key;
-	    $('<td>').html(value).appendTo(tr);
+	    $('<td>').html(replaceTableTd(key, value)).appendTo(tr);
 	  });
 	  tbody.append(tr);
 	});
 
-	  var tr = $('<tr>');
+	  var tr = $('<tr class="text-muted">');
 	  $.each(columns, function(key, value) {
-	    $('<th>').html(value).appendTo(tr);
+	    $('<th>').html(replaceTableTh(value)).appendTo(tr);
 	  });
 	  thead.append(tr);
+}
+
+function replaceTableTh(value) 
+{
+	if(value==='account_name')
+		return 'Account Name';
+
+	if(value==='charId')
+		return 'ID';
+
+	if(value==='char_name')
+		return 'Char Name';
+
+	if(value==='level')
+		return 'Level';
+
+	if(value==='onlinetime')
+		return 'Online Time';
+
+	if(value==='pvpkills')
+		return 'PVP Kills';
+
+	return value;
+}
+
+function replaceTableTd(key, value) 
+{
+	if(key==='onlinetime')
+		return secondsToHms(value,true);
+
+	return value;
 }
 
 function changeOnline(el) 
@@ -588,6 +619,20 @@ function checkTime(i) {
         i = "0" + i;
     }
     return i;
+}
+
+function secondsToHms(d,no_seconds) {
+    d = Number(d);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour " : " hours ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+     if(no_seconds)
+     	sDisplay = '';
+    return hDisplay + mDisplay + sDisplay; 
 }
 
 function startTime() {
