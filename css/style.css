@@ -700,3 +700,7 @@ a.collapsed {
 .custom-range:focus::-ms-fill-upper {
 
 }
+
+.font-times {
+  font-family: "Times New Roman", Times, serif;
+}
