@@ -577,12 +577,12 @@ button {
 /* Footer
 -----------------------------------------------------------------------------*/
 .footer {
-  padding: 200px 150px 30px 150px;
+  padding: 200px 0 0 0;
 }
 .f-menu {
   border-bottom: 1px solid #8fa1b0;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .f-menu li {
   display: inline-block;
@@ -628,6 +628,10 @@ button {
   background-color: #1C140F !important;
 }
 
+.text-brown {
+  color: #BC7657 !important;
+}
+
 .half-box {
   width: 50%;
   margin: 0 auto;
@@ -655,14 +659,20 @@ a.collapsed {
 
 .custom-range::-webkit-slider-thumb {
   background: #BC6640 !important;
+   width: 25px !important;
+   height: 25px !important;
 }
 
 .custom-range::-moz-range-thumb {
   background: #BC6640 !important;
+   width: 25px !important;
+   height: 25px !important;
 }
 
 .custom-range::-ms-thumb {
   background: #BC6640 !important;
+   width: 25px !important;
+   height: 25px !important; 
 }
 
 .custom-range::-webkit-slider-runnable-track {

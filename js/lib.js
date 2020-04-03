@@ -335,16 +335,16 @@ function makeTable(table, data) {
 
 function changeOnline(el) 
 {
-	var online = "<span class='text-success'>Online: </span>";
-	var offline = "<span>Offline: </span>";
-	var end = " Players";
+	var online = '<i class="fas fa-circle text-success"></i> <span class=" font-weight-bold"> Online</span> <span class="text-brown">(Since 2020 03 27)</span></div><div class="col-4 text-right">';
+	var start = '<div class="row"><div class="col-8 ">';
+	var end = " Players</div></div>";
 
 	//$(el).html(online + '159' + end);
-	$(el).html(online + '?' + end);
+	$(el).html(start + online + '?' + end);
 
 	$.getJSON(link.online, function( data ) {
 		if(data.data)
-			$(el).html(online + (data.data.length + 7 + 1) + end);
+			$(el).html(start + online + (data.data.length + 7 + 1) + end);
 	});
 }
 
