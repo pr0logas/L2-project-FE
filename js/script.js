@@ -6,9 +6,7 @@
 
 	getPage('home.html');
 
-	changeOnline('#online');
-
-	startTime('#countdown')
+	//startTime('#countdown')
 
 });
 

@@ -133,6 +133,8 @@ The player has to collect, build, do quests and prove his skills.
 </div><!-- feature-block -->
 
 <script type="text/javascript">
+	changeOnline('#online');
+	
 	getAdeptioPriceCall(function(adeptioPrice, bitcoinPrice)
 	{
 	    setAdenaRangeBitcoin($('#tradeAdenaRange').val(), adeptioPrice, bitcoinPrice);
