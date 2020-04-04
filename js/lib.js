@@ -14,90 +14,6 @@ $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownErr
   response(xhr.responseText + ' - ' + btoa(ajaxOptions.url));
 });
 
-function adenaToAdeptio(count) {
-	return parseFloat(count / 10000).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-}
-
-function adena(count) {
-	return parseFloat(count).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-}
-
-
-function adeptioToUSD(id, count) {
-	var usd = count / 10000;
-	var btc = count / 100000000;
-	$.getJSON(link.getAdeptioPrice, function( data ) {
-	if(data.data)
-		var adeptioPrice = data.data[0];
-		var bitcoinPrice = data.data[1];
-		total = (adeptioPrice * bitcoinPrice)
-		usd = parseFloat(count * total).toFixed(4).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-		btc = parseFloat(count *  adeptioPrice).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-		$(id).html('$ ' + usd + ' USD or ' +  '<img src="images/Bitcoin.png" height="24" width="24">' + ' ' + btc + ' BTC');
-	});
-}
-
-function changeBackground(link) 
-{
-	if(link === 'home.html' || link === '' || link === '/') 
-	{
-		$("body").removeClass("body-dark");
-		$("body").addClass("body-general");
-		return;
-	}
-	$("body").removeClass("body-general");
-	$("body").addClass("body-dark");
-}
-
-function getPage(el,scroll) 
-{
-	var link = getLink(el);
-
-	$.get(link, function( data ) {
-	  putContent(data);
-	  changeBackground(link);
-	  $(el).attr("loading", "false");
-	});
-
-	changeUrl(link);
-
-	/*if(scroll)
-		$('html, body').animate({
-	        scrollTop: $('#content').offset().top
-	    }, 1000);*/
-}
-
-function getLink(el) 
-{
-	if(!el) return
-
-	if(typeof el === 'object')
-		el = $(el).attr('href');
-
-	return el;
-}
-
-function putContent(data) 
-{
-	removeChilds('main.content', ['media-block']);
-	$('main.content').prepend(data);
-	afterUpdate();
-}
-
-function removeChilds(el, leave) 
-{
-	$(el).children().each(function () {
-		var attr = $(this).attr('class');
-    	if(leave.indexOf(attr) < 0)
-    		$(this).remove();
-	});
-}
-
-function changeUrl(link) 
-{
-	//window.history.pushState('page2', 'Title', link);
-}
-
 function submitForm(el) 
 {
 	response('Loading, please wait...');
@@ -138,53 +54,28 @@ function submitForm(el)
 	});
 }
 
-function getAction(el) 
-{
-	var action = el.action;
+function withdrawAdeptioResponse(data) {
+	if(typeof data.data !== 'string')
+		return;
 
- 	if(radioValue(action, 'clicked'))
- 		action = radioValue(action, 'clicked');
+	var tx = data.data;
 
- 	return action + '?' + getActionSerialize(el);
+	response("Your withdrawal is successful. Here is your transaction id: " + tx);
 }
 
-function getActionSerialize(el) 
+function changeOnline(el) 
 {
-	var values, index;
+	var online = '<i class="fas fa-circle text-success"></i> <span class=" font-weight-bold"> Online</span> <span class="text-brown">(Since 2020 03 27)</span></div><div class="col-4 text-right">';
+	var start = '<div class="row"><div class="col-8 ">';
+	var end = " Players</div></div>";
 
-	// Get the parameters as an array
-	values = $(el).serializeArray();
+	//$(el).html(online + '159' + end);
+	$(el).html(start + online + '?' + end);
 
-	// Find and replace `content` if there
-	for (index = 0; index < values.length; ++index) 
-
-	    values[index].value = changeFormValue(values[index].name, values[index].value);
-
-	// Convert to URL-encoded string
-	return jQuery.param(values);
-}
-
-function changeFormValue(name, value) 
-{
-	if (name == "account" && !value)
-		return Cookies.get('account'); 
-
-	if (name == "token")
-		return sha1ToBase64(value);
-
-	return value;
-}
-
-function sha1ToBase64(string) 
-{
-	var hash= sha1(string);
-
-	if (hash.length % 2) 
-		hash= "0"+ hash;
-
-	hash = hash.replace(/[a-f0-9][a-f0-9]/g, function (c, i) { return String.fromCharCode(parseInt(c, 16)) });
-
-	return btoa(hash);
+	$.getJSON(link.online, function( data ) {
+		if(data.data)
+			$(el).html(start + online + (data.data.length + 7 + 1) + end);
+	});
 }
 
 function depositAdeptioResponse(data) {
@@ -204,28 +95,27 @@ function depositAdeptioResponse(data) {
 	response("Deposit wallet addr: " + wlt);
 }
 
-function withdrawAdeptioResponse(data) {
-	if(typeof data.data !== 'string')
-		return;
-
-	var tx = data.data;
-
-	response("Your withdrawal is successful. Here is your transaction id: " + tx);
-}
-
-function logined(data, newone) 
+function replaceTableTh(value) 
 {
-	Cookies.set('account', data)
-	Cookies.set('newone', newone);
-	getPage('cp.html');
-	loginMenu();
-}
+	if(value==='account_name')
+		return 'Account Name';
 
-function response(text, data) {
-	$('.page-content .alertResponse').remove();
-	$('.page-content').prepend($("#alertResponse").clone());
-	$('.page-content .alertResponse').html(text);
-	$('.page-content .alertResponse').append(getError(data));
+	if(value==='charId')
+		return 'ID';
+
+	if(value==='char_name')
+		return 'Char Name';
+
+	if(value==='level')
+		return 'Level';
+
+	if(value==='onlinetime')
+		return 'Online Time';
+
+	if(value==='pvpkills')
+		return 'PVP Kills';
+
+	return value;
 }
 
 function getError(data) 
@@ -254,6 +144,174 @@ function getError(data)
 		return "Not found";
 }
 
+function USDandBTCformat(usd, btc) {
+	return '$ ' + usd + ' USD or ' +  '<img src="images/Bitcoin.png" height="24" width="24">' + ' ' + btc + ' BTC';
+}
+
+function replaceTableTd(key, value) 
+{
+	if(key==='onlinetime')
+		return secondsToHms(value,true);
+
+	return value;
+}
+
+function adenaToAdeptio(count) {
+	return round(count / 10000, 2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+}
+
+function adena(count) {
+	return round(count, 2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+}
+
+function loginMenu() {
+	var account = Cookies.get('account');
+	$("#login").html("");
+	if(account)
+		$("#login").html('<a href="/cp.html">'+account+'</a>');
+	else
+		$("#login").append( $("#loginMenu").clone() );
+}
+
+function logout() {
+	Cookies.remove('account');
+	checkLogin();
+}
+
+function checkLogin() {
+	if(Cookies.get('account'))
+		return true;
+	getPage('login.html');
+	loginMenu();
+}
+
+function adeptioToUSD(id, count) {
+	var usd = count / 10000;
+	var btc = count / 100000000;
+	$.getJSON(link.getAdeptioPrice, function( data ) {
+	if(data.data)
+		var adeptioPrice = data.data[0];
+		var bitcoinPrice = data.data[1];
+		total = (adeptioPrice * bitcoinPrice)
+		usd = round(count * total, 4).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+		btc = round(count *  adeptioPrice, 8).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+		$(id).html(USDandBTCformat(usd, btc));
+	});
+}
+
+function changeFormValue(name, value) 
+{
+	if (name == "account" && !value)
+		return Cookies.get('account'); 
+
+	if (name == "token")
+		return sha1ToBase64(value);
+
+	return value;
+}
+
+function logined(data, newone) 
+{
+	Cookies.set('account', data)
+	Cookies.set('newone', newone);
+	getPage('cp.html');
+	loginMenu();
+}
+
+function response(text, data) {
+	$('.page-content .alertResponse').remove();
+	$('.page-content').prepend($("#alertResponse").clone());
+	$('.page-content .alertResponse').html(text);
+	$('.page-content .alertResponse').append(getError(data));
+}
+
+function getPage(el,scroll) 
+{
+	var link = getLink(el);
+
+	$.get(link, function( data ) {
+	  putContent(data);
+	  changeBackground(link);
+	  $(el).attr("loading", "false");
+	});
+
+	changeUrl(link);
+
+	/*if(scroll)
+		$('html, body').animate({
+	        scrollTop: $('#content').offset().top
+	    }, 1000);*/
+}
+
+function putContent(data) 
+{
+	removeChilds('main.content', ['media-block']);
+	$('main.content').prepend(data);
+	afterUpdate();
+}
+
+function changeBackground(link) 
+{
+	if(link === 'home.html' || link === '' || link === '/') 
+	{
+		$("body").removeClass("body-dark");
+		$("body").addClass("body-general");
+		return;
+	}
+	$("body").removeClass("body-general");
+	$("body").addClass("body-dark");
+}
+
+function getLink(el) 
+{
+	if(!el) return
+
+	if(typeof el === 'object')
+		el = $(el).attr('href');
+
+	return el;
+}
+
+function removeChilds(el, leave) 
+{
+	$(el).children().each(function () {
+		var attr = $(this).attr('class');
+    	if(leave.indexOf(attr) < 0)
+    		$(this).remove();
+	});
+}
+
+function changeUrl(link) 
+{
+	//window.history.pushState('page2', 'Title', link);
+}
+
+function getAction(el) 
+{
+	var action = el.action;
+
+ 	if(radioValue(action, 'clicked'))
+ 		action = radioValue(action, 'clicked');
+
+ 	return action + '?' + getActionSerialize(el);
+}
+
+function getActionSerialize(el) 
+{
+	var values, index;
+
+	// Get the parameters as an array
+	values = $(el).serializeArray();
+
+	// Find and replace `content` if there
+	for (index = 0; index < values.length; ++index) 
+
+	    values[index].value = changeFormValue(values[index].name, values[index].value);
+
+	// Convert to URL-encoded string
+	return jQuery.param(values);
+}
+
 function radioValue(radioNodeList, attr) {
 	if(typeof radioNodeList === 'string')
 		return false;
@@ -278,27 +336,6 @@ function radioAttr(radioNodeList, attr) {
 
 function formValue(el, name) {
 	 return $(el).find('input[name="'+name+'"]').val();
-}
-
-function loginMenu() {
-	var account = Cookies.get('account');
-	$("#login").html("");
-	if(account)
-		$("#login").html('<a href="/cp.html">'+account+'</a>');
-	else
-		$("#login").append( $("#loginMenu").clone() );
-}
-
-function logout() {
-	Cookies.remove('account');
-	checkLogin();
-}
-
-function checkLogin() {
-	if(Cookies.get('account'))
-		return true;
-	getPage('login.html');
-	loginMenu();
 }
 
 function checkNewOne() {
@@ -333,52 +370,6 @@ function makeTable(table, data) {
 	  thead.append(tr);
 }
 
-function replaceTableTh(value) 
-{
-	if(value==='account_name')
-		return 'Account Name';
-
-	if(value==='charId')
-		return 'ID';
-
-	if(value==='char_name')
-		return 'Char Name';
-
-	if(value==='level')
-		return 'Level';
-
-	if(value==='onlinetime')
-		return 'Online Time';
-
-	if(value==='pvpkills')
-		return 'PVP Kills';
-
-	return value;
-}
-
-function replaceTableTd(key, value) 
-{
-	if(key==='onlinetime')
-		return secondsToHms(value,true);
-
-	return value;
-}
-
-function changeOnline(el) 
-{
-	var online = '<i class="fas fa-circle text-success"></i> <span class=" font-weight-bold"> Online</span> <span class="text-brown">(Since 2020 03 27)</span></div><div class="col-4 text-right">';
-	var start = '<div class="row"><div class="col-8 ">';
-	var end = " Players</div></div>";
-
-	//$(el).html(online + '159' + end);
-	$(el).html(start + online + '?' + end);
-
-	$.getJSON(link.online, function( data ) {
-		if(data.data)
-			$(el).html(start + online + (data.data.length + 7 + 1) + end);
-	});
-}
-
 function getAdeptioPriceCall(callback) 
 {
 	$.getJSON(link.getAdeptioPrice, function( data ) {
@@ -410,7 +401,7 @@ function getAdeptioUserInfo(adeptio, usd) {
 		if(data.data && data.data[0].balance)
 			count = data.data[0].balance;
 
-		changeFormat = parseFloat(count).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+		changeFormat = round(count, 1).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
 		$(adeptio).html(changeFormat);
 		adeptioToUSD(usd, count);
@@ -427,7 +418,7 @@ function getUserMoneyCount(adena, adeptio) {
 		if(data.data)
 			count = data.data;
 		
-		changeFormat = parseFloat(count).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+		changeFormat = round(count, 2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
 		$(adena).html(changeFormat);
 		$(adeptio).html(adenaToAdeptio(count));
@@ -454,6 +445,22 @@ function numberWithSpaces(x) {
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     return parts.join(".");
+}
+
+function sha1ToBase64(string) 
+{
+	var hash= sha1(string);
+
+	if (hash.length % 2) 
+		hash= "0"+ hash;
+
+	hash = hash.replace(/[a-f0-9][a-f0-9]/g, function (c, i) { return String.fromCharCode(parseInt(c, 16)) });
+
+	return btoa(hash);
+}
+
+function round(numb, count) {
+	return parseFloat(numb).toFixed(count);
 }
 
 function sha1(str) {
