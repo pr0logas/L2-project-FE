@@ -1,18 +1,18 @@
 <script>checkLogin()</script>
 <h1 class="text-center pb-3 font-times">Player Dashboard</h1>
-  <div class="bg-dark border border-secondary rounded p-3">
+  <div class="bg-dark border border-secondary rounded p-3 pr-5 pl-5">
     <div class="row">
 
     <div class="col-6">
-      <button type="button" class="btn btn-danger" onclick="logout()">Logout</button>
-    </div>
-    <div class="col-6 font-times">
-     <h3 class="d-inline-block text-uppercase mr-2 mb-0"> <a class="text-white" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
+        <h4 class="d-inline-block mr-2 mb-0"> <a class="text-white" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
           Assets
-        </a></h3>
-        <h3 class="d-inline-block text-uppercase ml-2 mb-0"><a class="text-white collapsed" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="true" aria-controls="collapseExample2">
-    Player Stats
-  </a></h3>
+        </a></h4>
+        <h4 class="d-inline-block ml-2 mb-0"><a class="text-white collapsed" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="true" aria-controls="collapseExample2">
+          Player Stats
+        </a></h4>
+    </div>
+    <div class="col-6 text-right">
+      <i class="fas fa-sign-out-alt"></i> <a href="#" class="" onclick="logout()">Sign out</a>
     </div>
   </div>
 
@@ -24,88 +24,127 @@
 
 <div class="collapse show d-none" id="collapseExample" data-parent="#accordionExample">
 
-<div class="container">
-  <div class="d-flex justify-content-center h-100">
+<div class="row">
   
-  <div class="card border-dark bg-dark mb-3 mr-3" >
-  <div class="card-header"><img src="//l2wiki.com/images/3/34/Item_57.jpg"> Your Adena in L2-Corona</div>
-  <div class="card-body">
-    <h5 class="card-title"><span id="getUserMoneyCount">?</span> Adena</h5>
-    <p class="card-text">~ <span id="getUserMoneyCountAdeptio">?</span> Adeptio (ADE)</p>
+  
+    <div class="col-4">
 
-    <form>
-      <div class="form-group">
-        <label for="formowner">Select Character</label>
-        <select class="form-control" id="formowner" name="owner" required></select>
+      <div class="d-flex justify-content-center">
+
+      <div class="card border-dark bg-dark mb-3 mr-3" >
+      <div class="card-header"><img src="//l2wiki.com/images/3/34/Item_57.jpg">Adena (L2)</div>
+      <div class="card-body">
+        <h5 class="card-title"><span id="getUserMoneyCount">?</span> Adena</h5>
+        <p class="card-text">~ <span id="getUserMoneyCountAdeptio">?</span> Adeptio (ADE)</p>
+
+        <form class="collapse" id="collapseAdena">
+          <div class="form-group">
+            <label for="formowner">Select Character</label>
+            <select class="form-control" id="formowner" name="owner" required></select>
+          </div>
+          <div class="form-group">
+            <label for="formcount1">Amount</label>
+            <input type="text" class="form-control" id="formcount1" placeholder="0" name="count" required>
+          </div>
+          <div class="form-group">
+            <label for="formpassword">Password</label>
+            <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
+          </div>
+          <input type="hidden" style="display: none;" name="account">
+          <button type="submit" class="btn btn-danger" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/buyAdena">Buy Adena</button>
+          <button type="submit" class="btn btn-danger" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/sellAdena">Sell Adena</button>
+        </form>
+
+        <div>
+          <a class="btn btn-danger" data-toggle="collapse" href="#collapseAdena" role="button" aria-expanded="true" aria-controls="collapseAdena" onclick="$(this).parent().hide()">
+            Buy Adena
+          </a>
+          <a class="btn btn-danger" data-toggle="collapse" href="#collapseAdena" role="button" aria-expanded="true" aria-controls="collapseAdena" onclick="$(this).parent().hide()">
+            Sell Adena
+          </a>
       </div>
-      <div class="form-group">
-        <label for="formcount1">Amount</label>
-        <input type="text" class="form-control" id="formcount1" placeholder="0" name="count" required>
+
       </div>
-      <div class="form-group">
-        <label for="formpassword">Password</label>
-        <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
-      </div>
-      <input type="hidden" style="display: none;" name="account">
-      <button type="submit" class="btn btn-danger" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/buyAdena">Buy Adena</button>
-      <button type="submit" class="btn btn-danger" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/sellAdena">Sell Adena</button>
-    </form>
+    </div>
 
   </div>
-</div>
 
-  <div class="card border-dark bg-dark mb-3 mr-3">
-  <div class="card-header"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Your Adeptio (ADE) cryptocurrency</div>
-  <div class="card-body ">
-    <h5 class="card-title"><span id="getAdeptioUserInfo">?</span> Adeptio (ADE)</h5>
-    <p class="card-text">~ <span id="getAdeptioUserInfoUSD">?</span></p>
+  </div> <!-- col-6 -->
+  <div class="col-8">
 
-    <form>
-      <div class="form-group">
-        <label for="formwlt">Adeptio Wallet</label>
-        <input type="text" class="form-control" id="formwlt" placeholder="ASpLv9c3UTN6SZXYR29iW46xFGjHRRvPWf" name="wlt" required>
+    <div class="d-flex justify-content-center">
+
+      <div class="card border-dark bg-dark mb-3 mr-3">
+      <div class="card-header"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Withdraw Adeptio (ADE)</div>
+      <div class="card-body ">
+        <h5 class="card-title"><span id="getAdeptioUserInfo">?</span> Adeptio (ADE)</h5>
+        <p class="card-text">~ <span id="getAdeptioUserInfoUSD">?</span></p>
+
+        <form class="collapse" id="collapseWithdrawAdeptio">
+          <div class="form-group">
+            <label for="formwlt">Adeptio Wallet</label>
+            <input type="text" class="form-control" id="formwlt" placeholder="ASpLv9c3UTN6SZXYR29iW46xFGjHRRvPWf" name="wlt" required>
+          </div>
+          <div class="form-group">
+            <label for="formcount2">Amount</label>
+            <input type="text" class="form-control" id="formcount2" placeholder="0" name="count" required>
+          </div>
+          <div class="form-group">
+            <label for="formpassword">Password</label>
+            <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
+          </div>
+          <input type="hidden" style="display: none;" name="account">
+          <button type="submit" class="btn btn-danger btn-block" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/withdrawAdeptio" response="withdrawAdeptioResponse">Withdraw Adeptio</button>
+          <button type="submit" class="btn btn-danger btn-block" name="action" style="display: none;"> </button>
+        </form>
+
+        <div>
+          <a class="btn btn-danger btn-block" data-toggle="collapse" href="#collapseWithdrawAdeptio" role="button" aria-expanded="true" aria-controls="collapseWithdrawAdeptio" onclick="$(this).parent().hide()">
+            Withdraw Adeptio
+          </a>
       </div>
-      <div class="form-group">
-        <label for="formcount2">Amount</label>
-        <input type="text" class="form-control" id="formcount2" placeholder="0" name="count" required>
+
       </div>
-      <div class="form-group">
-        <label for="formpassword">Password</label>
-        <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
+    </div>
+
+      <div class="card border-dark bg-dark mb-3">
+      <div class="card-header"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Deposit Adeptio (ADE)</div>
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+
+        <form class="collapse" id="collapseDepositAdeptio">
+          <div class="form-group d-none">
+            <label for="depositAdeptioWalletInput">Deposit Wallet</label>
+            <input type="text" class="form-control" id="depositAdeptioWalletInput" readonly>
+          </div>
+          <div class="form-group d-none">
+            <label for="depositAdeptioCount">Amount</label>
+            <input type="text" class="form-control" id="depositAdeptioCount" placeholder="0" name="count">
+          </div>
+          <div class="form-group">
+            <label for="formpassword">Password</label>
+            <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
+          </div>
+          <input type="hidden" style="display: none;" name="account">
+          <input type="hidden" style="display: none;" name="wlt" id="depositAdeptiowlt">
+          <button type="submit" class="btn btn-danger btn-block" id="depositAdeptio" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptio" response="depositAdeptioResponse">Deposit Adeptio</button>
+          <button type="submit" class="btn btn-danger btn-block d-none" id="depositAdeptioApproval" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptioApproval">Deposit Approval</button>
+        </form>
+
+        <div>
+          <a class="btn btn-danger btn-block" data-toggle="collapse" href="#collapseDepositAdeptio" role="button" aria-expanded="true" aria-controls="collapseDepositAdeptio" onclick="$(this).parent().hide()">
+            Deposit Adeptio
+          </a>
       </div>
-      <input type="hidden" style="display: none;" name="account">
-      <button type="submit" class="btn btn-danger" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/withdrawAdeptio" response="withdrawAdeptioResponse">Withdraw to Adeptio (ADE) wallet</button>
-      <button type="submit" class="btn btn-danger" name="action" style="display: none;"> </button>
-    </form>
+
+      </div>
+    </div>
+
   </div>
-</div>
 
-  <div class="card border-dark bg-dark mb-3">
-  <div class="card-header"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Deposit Adeptio (ADE)</div>
-  <div class="card-body">
-    <h5 class="card-title"></h5>
+  </div> <!-- col-6 -->
 
-    <form>
-      <div class="form-group d-none">
-        <label for="depositAdeptioWalletInput">Deposit Wallet</label>
-        <input type="text" class="form-control" id="depositAdeptioWalletInput" readonly>
-      </div>
-      <div class="form-group d-none">
-        <label for="depositAdeptioCount">Amount</label>
-        <input type="text" class="form-control" id="depositAdeptioCount" placeholder="0" name="count">
-      </div>
-      <div class="form-group">
-        <label for="formpassword">Password</label>
-        <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
-      </div>
-      <input type="hidden" style="display: none;" name="account">
-      <input type="hidden" style="display: none;" name="wlt" id="depositAdeptiowlt">
-      <button type="submit" class="btn btn-danger" id="depositAdeptio" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptio" response="depositAdeptioResponse">Deposit Adeptio</button>
-      <button type="submit" class="btn btn-danger d-none" id="depositAdeptioApproval" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptioApproval">Deposit Approval</button>
-    </form>
-  </div>
-</div>
-  </div>
+
 </div>
 
 </div>
