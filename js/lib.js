@@ -74,7 +74,7 @@ function changeOnline(el)
 
 	$.getJSON(link.online, function( data ) {
 		if(data.data)
-			$(el).html(start + online + (data.data.length + 7 + 1) + end);
+			$(el).html(start + online + (data.data.length) + end);
 	});
 }
 
