@@ -514,7 +514,7 @@ function getPlayersInfo(table)
 
 		makeTable(
 			table, 
-			data.data, 
+			sortBy(data.data, 'pvpkills'), 
 			{
 				limit: 7,
 				numeration: true,
@@ -864,6 +864,15 @@ function startTime() {
 
 function uniqID() {
   return Math.round(new Date().getTime() + (Math.random() * 100));
+}
+
+function sortBy(data, key) 
+{
+	data.sort(function(a, b) {
+	    var x = a[key], y = b[key];
+	    return x < y ? 1 : x > y ? -1 : 0;
+	});
+	return data;
 }
 
 function setProff(x) {
