@@ -4,7 +4,9 @@
 	getAdeptioUserInfo: 'https://l2-corona-api.adeptio.cc/apiv1/getAdeptioUserInfo?account=',
 	getUserMoneyCount: 'https://l2-corona-api.adeptio.cc/apiv1/getUserMoneyCount?account=',
 	getMoneyCount: 'https://l2-corona-api.adeptio.cc/apiv1/getMoneyCount?charId=',
-	getAdeptioPrice : 'https://l2-corona-api.adeptio.cc/apiv1/getCryptoPrices'
+	getAdeptioPrice : 'https://l2-corona-api.adeptio.cc/apiv1/getCryptoPrices',
+	getPlayersInfo: 'https://l2-api.adeptio.cc/apiv1/getInfo',
+	getClansInfo: 'https://l2-api.adeptio.cc/apiv1/getClans'
 }
 
 $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownError) {
@@ -26,6 +28,8 @@ function submitForm(el)
 	    timeout: 120 * 1000,
 	    success: function(data)
 		{
+			$('.modal').modal('hide');
+
 			$(el).find('button').removeAttr('disabled');
 
 			if ( typeof replaceAccountInfo === 'function' ) { 
@@ -74,7 +78,7 @@ function changeOnline(el)
 
 	$.getJSON(link.online, function( data ) {
 		if(data.data)
-			$(el).html(start + online + (data.data.length + 7 + 1) + end);
+			$(el).html(start + online + (data.data.length) + end);
 	});
 }
 
@@ -104,7 +108,7 @@ function replaceTableTh(value)
 		return 'ID';
 
 	if(value==='char_name')
-		return 'Char Name';
+		return 'Name';
 
 	if(value==='level')
 		return 'Level';
@@ -113,7 +117,22 @@ function replaceTableTh(value)
 		return 'Online Time';
 
 	if(value==='pvpkills')
-		return 'PVP Kills';
+		return 'Kills';
+
+	if(value==='clan_name')
+		return 'Clan';
+
+	if(value==='classid')
+		return 'Profession';
+
+	if(value==='hasCastle')
+		return 'Has Castle';
+
+	if(value==='leader_id')
+		return 'Leader';
+
+	if(value==='reputation_score')
+		return 'Reputation';
 
 	return value;
 }
@@ -145,7 +164,8 @@ function getError(data)
 }
 
 function USDandBTCformat(usd, btc) {
-	return '$ ' + usd + ' USD or ' +  '<img src="images/Bitcoin.png" height="24" width="24">' + ' ' + btc + ' BTC';
+	//return '$ ' + usd + ' USD or ' +  '<img src="images/Bitcoin.png" height="24" width="24">' + ' ' + btc + ' BTC';
+	return btc + ' BTC';
 }
 
 function replaceTableTd(key, value) 
@@ -153,11 +173,20 @@ function replaceTableTd(key, value)
 	if(key==='onlinetime')
 		return secondsToHms(value,true);
 
+	if(key==='classid')
+		return setProff(value);
+
+	if(key==='castleid')
+		return setCastle(value);
+
+	if(key==='clan_name' && !value)
+		return '-';
+
 	return value;
 }
 
 function adenaToAdeptio(count) {
-	return round(count / 10000, 2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+	return numberWithSpaces(round(count / 10000, 0));
 }
 
 function adena(count) {
@@ -344,7 +373,9 @@ function checkNewOne() {
 	return false;
 }
 
-function makeTable(table, data) {
+function makeTable(table, data, settings) {
+	settings = toObject(settings);
+
 	$(table).html("");
 	$(table).append("<thead></thead>");
 	$(table).append("<tbody></tbody>");
@@ -354,9 +385,20 @@ function makeTable(table, data) {
 
 	var columns = {};
 
+	var removeCol = toArray(settings.removeCol);
+
 	$.each(data, function(i, row) {
+	  if(settings.limit)
+	  	if(i>settings.limit)
+	  		return;
 	  var tr = $('<tr>');
+	  if(settings.numeration) {
+	  	columns['--numeration--'] = '';
+	  	$('<td>').html(i+1).appendTo(tr);
+	  }
 	  $.each(row, function(key, value) {
+	  	if(inArray(key,removeCol))
+	  		return;
 	  	columns[key] = key;
 	    $('<td>').html(replaceTableTd(key, value)).appendTo(tr);
 	  });
@@ -368,6 +410,76 @@ function makeTable(table, data) {
 	    $('<th>').html(replaceTableTh(value)).appendTo(tr);
 	  });
 	  thead.append(tr);
+}
+
+function makeModal(el, button) {
+	var modal_id = uniqID();
+	var modal = $("#modal").clone();
+	var modal_title = modal.find('.modal-title');
+	var modal_body = modal.find('.modal-body');
+	var title = $(el).find('[type="modal-title"]').html();
+	var body = $(el).find('[type="modal-body"]');
+
+	modal.attr('id', modal_id);
+	modal.attr('aria-labelledby', modal_id+'label');
+
+	modal_title.attr('id', modal_id+'label');
+	modal_title.html(title);
+
+	modal_body.html(makeAccordion(body));
+
+	$('body').append(modal);
+
+	$(button).attr('data-toggle', 'modal');
+	$(button).attr('data-target', '#'+modal_id);
+	$(button).removeAttr('onclick');
+
+	afterUpdate();
+}
+
+function makeAccordion(el) 
+{
+	var accordion_id = uniqID();
+	var accordion = $("<div>");
+ 	var accordions = $(el).find('[type="accordion"]');
+
+	accordion.attr('class', 'accordion');
+	accordion.attr('id', accordion_id);
+
+	$(accordions).each(function(i,card) 
+	{
+		accordion.append(makeAccordionCard(card, accordion_id));
+	});
+
+	return accordion;
+}
+
+function makeAccordionCard(el, accordion_id) 
+{
+	var card_id = uniqID();
+	var card = $("#accordion-card").clone();
+	var card_collapse = card.find('.collapse');
+	var card_header = card.find('.card-header');
+	var card_title = card.find('.card-title');
+	var card_body = card.find('.card-body');
+	var title = $(el).find('[type="accordion-title"]').html();
+	var body = $(el).find('[type="accordion-body"]').html();
+
+	card.removeAttr('id');
+
+	card_header.attr('id', card_id+'label');
+
+	card_collapse.attr('id', card_id);
+	card_collapse.attr('data-parent', '#'+accordion_id);
+	card_collapse.attr('aria-labelledby', card_id+'label');
+
+	card_title.attr('data-target', '#'+card_id);
+	card_title.attr('aria-controls', card_id);
+
+	card_title.html(title);
+	card_body.html(body);
+
+	return card;
 }
 
 function getAdeptioPriceCall(callback) 
@@ -386,8 +498,51 @@ function getUserInfo(table)
 		return;
 
 	$.getJSON(link.getUserInfo + Cookies.get('account'), function( data ) {
-		if(data.data)
-			makeTable(table, data.data);
+		if(!data.data)
+			return;
+
+		makeTable(table, data.data);
+	});
+}
+
+function getPlayersInfo(table) 
+{
+	$.getJSON(link.getPlayersInfo, function( data ) 
+	{
+		if(!data.data)
+			return;
+
+		makeTable(
+			table, 
+			data.data, 
+			{
+				limit: 7,
+				numeration: true,
+				removeCol: ['account_name', 'charId', 'onlinetime']
+			}
+		);
+
+		$(table).removeClass('d-none');
+	});
+}
+
+function getClansInfo(table) 
+{
+	$.getJSON(link.getClansInfo, function( data ) {
+		if(!data.data)
+			return;
+
+		makeTable(
+			table, 
+			data.data,
+			{
+				limit: 7,
+				numeration: true,
+				removeCol: ['ally_name']
+			}
+		);
+
+		$(table).removeClass('d-none');
 	});
 }
 
@@ -401,10 +556,10 @@ function getAdeptioUserInfo(adeptio, usd) {
 		if(data.data && data.data[0].balance)
 			count = data.data[0].balance;
 
-		changeFormat = round(count, 1).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+		changeFormat = numberWithSpaces(round(count, 0));
 
 		$(adeptio).html(changeFormat);
-		adeptioToUSD(usd, count);
+		//adeptioToUSD(usd, count);
 	});
 }
 
@@ -418,7 +573,7 @@ function getUserMoneyCount(adena, adeptio) {
 		if(data.data)
 			count = data.data;
 		
-		changeFormat = round(count, 2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+		changeFormat = numberWithSpaces(round(count, 0));
 
 		$(adena).html(changeFormat);
 		$(adeptio).html(adenaToAdeptio(count));
@@ -461,6 +616,30 @@ function sha1ToBase64(string)
 
 function round(numb, count) {
 	return parseFloat(numb).toFixed(count);
+}
+
+function toArray(el) {
+	return ( typeof el != 'undefined' && el instanceof Array ) ? el : [];
+}
+
+function toObject(el) {
+	return ( typeof el != 'undefined' && el instanceof Object ) ? el : [];
+}
+
+function inArray(needle,haystack)
+{
+    var count=haystack.length;
+    for(var i=0;i<count;i++)
+    {
+        if(haystack[i]===needle){return true;}
+    }
+    return false;
+}
+
+function scrollDown(el) {
+	$('html, body').animate({
+        scrollTop: $(el).offset().top
+    }, 1000);
 }
 
 function sha1(str) {
@@ -681,4 +860,445 @@ function startTime() {
     	$("#countdownbtn").click()
         startTime()
     }, 1000);*/
+}
+
+function uniqID() {
+  return Math.round(new Date().getTime() + (Math.random() * 100));
+}
+
+function setProff(x) {
+var proff = '';
+switch(x) {
+    case 0:
+        proff = "Fighter";
+        break;
+    case 1:
+        proff = "Warrior";
+        break;
+    case 2:
+        proff = "Gladiator";
+        break;
+    case 3:
+        proff = "Warlord";
+        break;
+    case 4:
+        proff = "Knight";
+        break;
+    case 5:
+        proff = "Paladin";
+        break;
+    case 6:
+        proff = "DarkAvenger";
+        break;
+    case 7:
+        proff = "Rogue";
+        break;
+    case 8:
+        proff = "TreasureHunter";
+        break;
+    case 9:
+        proff = "Hawkeye";
+        break;
+    case 10:
+        proff = "Mage";
+        break;
+    case 11:
+        proff = "Wizard";
+        break;
+    case 12:
+        proff = "Sorceror";
+        break;
+    case 13:
+        proff = "Necromancer";
+        break;
+    case 14:
+        proff = "Warlock";
+        break;
+    case 15:
+        proff = "Cleric";
+        break;
+    case 16:
+        proff = "Bishop";
+        break;
+    case 17:
+        proff = "Prophet";
+        break;
+    case 18:
+        proff = "ElvenFighter";
+        break;
+    case 19:
+        proff = "ElvenKnight";
+        break;
+    case 20:
+        proff = "TempleKnight";
+        break;
+    case 21:
+        proff = "SwordSinger";
+        break;
+    case 22:
+        proff = "ElvenScout";
+        break;
+    case 23:
+        proff = "PlainsWalker";
+        break;
+    case 24:
+        proff = "SilverRanger";
+        break;
+    case 25:
+        proff = "ElvenMage";
+        break;
+    case 26:
+        proff = "ElvenWizard";
+        break;
+    case 27:
+        proff = "Spellsinger";
+        break;
+    case 28:
+        proff = "ElementalSummoner";
+        break;
+    case 29:
+        proff = "Oracle";
+        break;
+    case 30:
+        proff = "Elder";
+        break;
+    case 31:
+        proff = "DarkFighter";
+        break;
+    case 32:
+        proff = "PalusKnight";
+        break;
+    case 33:
+        proff = "ShillienKnight";
+        break;
+    case 34:
+        proff = "Bladedancer";
+        break;
+    case 35:
+        proff = "Assassin";
+        break;
+    case 36:
+        proff = "AbyssWalker";
+        break;
+    case 37:
+        proff = "PhantomRanger";
+        break;
+    case 38:
+        proff = "DarkMage";
+        break;
+    case 39:
+        proff = "DarkWizard";
+        break;
+    case 40:
+        proff = "Spellhowler";
+        break;
+    case 41:
+        proff = "PhantomSummoner";
+        break;
+    case 42:
+        proff = "ShillienOracle";
+        break;
+    case 43:
+        proff = "ShillenElder";
+        break;
+    case 44:
+        proff = "OrcFighter";
+        break;
+    case 45:
+        proff = "OrcRaider";
+        break;
+    case 46:
+        proff = "Destroyer";
+        break;
+    case 47:
+        proff = "OrcMonk";
+        break;
+    case 48:
+        proff = "Tyrant";
+        break;
+    case 49:
+        proff = "OrcMage";
+        break;
+    case 50:
+        proff = "OrcShaman";
+        break;
+    case 51:
+        proff = "Overlord";
+        break;
+    case 52:
+        proff = "Warcryer";
+        break;
+    case 53:
+        proff = "DwarvenFighter";
+        break;
+    case 54:
+        proff = "Scavenger";
+        break;
+    case 55:
+        proff = "BountyHunter";
+        break;
+    case 56:
+        proff = "Artisan";
+        break;
+    case 57:
+        proff = "Warsmith";
+        break;
+    case 88:
+        proff = "Duelist";
+        break;
+    case 89:
+        proff = "Dreadnought";
+        break;
+    case 90:
+        proff = "PhoenixKnight";
+        break;
+    case 91:
+        proff = "HellKnight";
+        break;
+    case 92:
+        proff = "Sagittarius";
+        break;
+    case 93:
+        proff = "Adventurer";
+        break;
+    case 94:
+        proff = "Archmage";
+        break;
+    case 95:
+        proff = "Soultaker";
+        break;
+    case 96:
+        proff = "ArcanaLord";
+        break;
+    case 97:
+        proff = "Cardinal";
+        break;
+    case 98:
+        proff = "Hierophant";
+        break;
+    case 99:
+        proff = "EvaTemplar";
+        break;
+    case 100:
+        proff = "SwordMuse";
+        break;
+    case 101:
+        proff = "WindRider";
+        break;
+    case 102:
+        proff = "MoonlightSentinel";
+        break;
+    case 103:
+        proff = "MysticMuse";
+        break;
+    case 104:
+        proff = "ElementalMaster";
+        break;
+    case 105:
+        proff = "EvaSaint";
+        break;
+    case 106:
+        proff = "ShillienTemplar";
+        break;
+    case 107:
+        proff = "SpectralDancer";
+        break;
+    case 108:
+        proff = "GhostHunter";
+        break;
+    case 109:
+        proff = "GhostSentinel";
+        break;
+    case 110:
+        proff = "StormScreamer";
+        break;
+    case 111:
+        proff = "SpectralMaster";
+        break;
+    case 112:
+        proff = "ShillienSaint";
+        break;
+    case 113:
+        proff = "Titan";
+        break;
+    case 114:
+        proff = "GrandKhavatari";
+        break;
+    case 115:
+        proff = "Dominator";
+        break;
+    case 116:
+        proff = "Doomcryer";
+        break;
+    case 117:
+        proff = "FortuneSeeker";
+        break;
+    case 118:
+        proff = "Maestro";
+        break;
+    case 123:
+        proff = "MaleSoldier";
+        break;
+    case 124:
+        proff = "FemaleSoldier";
+        break;
+    case 125:
+        proff = "Trooper";
+        break;
+    case 126:
+        proff = "Warder";
+        break;
+    case 127:
+        proff = "Berserker";
+        break;
+    case 128:
+        proff = "MaleSoulbreaker";
+        break;
+    case 129:
+        proff = "FemaleSoulbreaker";
+        break;
+    case 130:
+        proff = "Arbalester";
+        break;
+    case 131:
+        proff = "Doombringer";
+        break;
+    case 132:
+        proff = "MaleSoulhound";
+        break;
+    case 133:
+        proff = "FemaleSoulhound";
+        break;
+    case 134:
+        proff = "Trickster";
+        break;
+    case 135:
+        proff = "Inspector";
+        break;
+    case 136:
+        proff = "Judicator";
+        break;
+}
+	return proff;
+}
+ 
+function setCastle(x) {
+var castle = '';
+switch(x) {
+    case 22:
+        castle = "Moonstone Hall - Gludio";
+        break;
+    case 23:
+        castle = "Onyx Hall - Gludio";
+        break;
+    case 24:
+        castle = "Topaz Hall - Gludio";
+        break;
+    case 25:
+        castle = "Ruby Hall - Gludio";
+        break;
+    case 26:
+        castle = "Crystal Hall - Gludin";
+        break;
+    case 27:
+        castle = "Onyx Hall - Gludin";
+        break;
+    case 28:
+        castle = "Sapphire Hall - Gludin";
+        break;
+    case 29:
+        castle = "Moonstone Hall - Gludin";
+        break;
+    case 30:
+        castle = "Emerald Hall - Gludin";
+        break;
+    case 31:
+        castle = "The Atramental Barracks - Dion";
+        break;
+    case 32:
+        castle = "The Scarlet Barracks Hall - Dion";
+        break;
+    case 33:
+        castle = "The Viridian Barracks - Dion";
+        break;
+    case 36:
+        castle = "The Golden Chamber - Aden";
+        break;
+    case 37:
+        castle = "The Silver Chamber - Aden";
+        break;
+    case 38:
+        castle = "The Mithril Chamber - Aden";
+        break;
+    case 39:
+        castle = "Silver Manor - Aden";
+        break;
+    case 40:
+        castle = "Gold Manor - Aden";
+        break;
+    case 41:
+        castle = "The Bronze Chamber - Aden";
+        break;
+    case 42:
+        castle = "The Golden Chamber - Giran";
+        break;
+    case 43:
+        castle = "The Silver Chamber - Giran";
+        break;
+    case 44:
+        castle = "The Mithril Chamber - Giran";
+        break;
+    case 45:
+        castle = "The Bronze Chamber - Giran";
+        break;
+    case 46:
+        castle = "Silver Manor - Giran";
+        break;
+    case 47:
+        castle = "Moonstone Hall - Goddard";
+        break;
+    case 48:
+        castle = "Onyx Hall - Goddard";
+        break;
+    case 49:
+        castle = "Emerald Hall - Goddard";
+        break;
+    case 50:
+        castle = "Sapphire Hall - Goddard";
+        break;
+    case 51:
+        castle = "Mont Chamber - Rune";
+        break;
+    case 52:
+        castle = "Astaire Chamber - Rune";
+        break;
+    case 53:
+        castle = "Aria Chamber - Rune";
+        break;
+    case 54:
+        castle = "Yiana Chamber - Rune";
+        break;
+    case 55:
+        castle = "Roien Chamber - Rune";
+        break;
+    case 56:
+        castle = "Luna Chamber - Rune";
+        break;
+    case 57:
+        castle = "Traban Chamber - Rune";
+        break;
+    case 58:
+        castle = "Eisen Hall - Schuttgart";
+        break;
+    case 59:
+        castle = "Heavy Metal Hall - Schuttgart";
+        break;
+    case 60:
+        castle = "Molten Ore Hall - Schuttgart";
+        break;
+    case 61:
+        castle = "Titan Hall - Schuttgart";
+        break;
+}
+   return castle;
 }
