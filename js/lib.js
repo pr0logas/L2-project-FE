@@ -435,6 +435,8 @@ function makeModal(el, button) {
 	$(button).removeAttr('onclick');
 
 	afterUpdate();
+
+	return modal_id;
 }
 
 function makeAccordion(el) 
@@ -442,6 +444,9 @@ function makeAccordion(el)
 	var accordion_id = uniqID();
 	var accordion = $("<div>");
  	var accordions = $(el).find('[type="accordion"]');
+
+ 	if(accordions.length <= 0)
+ 		return el;
 
 	accordion.attr('class', 'accordion');
 	accordion.attr('id', accordion_id);
@@ -505,16 +510,18 @@ function getUserInfo(table)
 	});
 }
 
-function getPlayersInfo(table) 
+function getPlayersInfo(table, modal) 
 {
 	$.getJSON(link.getPlayersInfo, function( data ) 
 	{
 		if(!data.data)
 			return;
 
+		data = sortBy(data.data, 'pvpkills');
+
 		makeTable(
 			table, 
-			sortBy(data.data, 'pvpkills'), 
+			data, 
 			{
 				limit: 7,
 				numeration: true,
@@ -523,6 +530,23 @@ function getPlayersInfo(table)
 		);
 
 		$(table).removeClass('d-none');
+
+		var modal_table = $(modal).find('table');
+		var modal_button = $(table).parent().find('a');
+
+		makeTable(
+			modal_table, 
+			data, 
+			{
+				numeration: true,
+				removeCol: ['account_name', 'charId', 'onlinetime']
+			}
+		);
+
+		modal_table.removeClass('d-none');
+
+		var modal_id = makeModal(modal, modal_button);
+		$('#'+modal_id).find('.modal-dialog').addClass('modal-lg');
 	});
 }
 
