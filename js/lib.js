@@ -538,7 +538,7 @@ function getClansInfo(table)
 			{
 				limit: 7,
 				numeration: true,
-				removeCol: ['ally_name']
+				removeCol: ['ally_name', 'leader_id']
 			}
 		);
 
