@@ -194,6 +194,14 @@ button {
 }
 /* Middle
 -----------------------------------------------------------------------------*/
+.page-bg {
+  background: #171921 !important;
+}
+
+.page-text {
+  color: #171921;
+}
+
 .page-content {
   background: #171921;
   height: 100%;
@@ -628,6 +636,10 @@ button {
   background-color: #1C140F !important;
 }
 
+.bg-brown-dark {
+  background-color: #1C140F !important;
+}
+
 .text-brown {
   color: #BC7657 !important;
 }
@@ -640,6 +652,10 @@ button {
 .perc75-box {
     width: 75%;
   margin: 0 auto;
+}
+
+.box-h-100 {
+  height: 100px;
 }
 
 .box-h-200 {
