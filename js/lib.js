@@ -6,6 +6,7 @@
 	getMoneyCount: 'https://l2-corona-api.adeptio.cc/apiv1/getMoneyCount?charId=',
 	getAdeptioPrice : 'https://l2-corona-api.adeptio.cc/apiv1/getCryptoPrices',
 	getPlayersInfo: 'https://l2-api.adeptio.cc/apiv1/getInfo',
+	getWealth: 'https://l2-api.adeptio.cc/apiv1/getWealth',
 	getClansInfo: 'https://l2-api.adeptio.cc/apiv1/getClans'
 }
 
@@ -28,7 +29,7 @@ function submitForm(el)
 	    timeout: 120 * 1000,
 	    success: function(data)
 		{
-			$('.modal').modal('hide');
+			//$('.modal').modal('hide');
 
 			$(el).find('button').removeAttr('disabled');
 
@@ -88,7 +89,7 @@ function depositAdeptioResponse(data) {
 
 	var wlt = data.data;
 
-	$("#depositAdeptioWallet").html(wlt);
+	//$("#depositAdeptioWallet").html(wlt);
 	$("#depositAdeptioWalletInput").parent().removeClass("d-none");
 	$("#depositAdeptioWalletInput").val(wlt);
 	$("#depositAdeptioCount").parent().removeClass("d-none");
@@ -133,6 +134,9 @@ function replaceTableTh(value)
 
 	if(value==='reputation_score')
 		return 'Reputation';
+
+	if(value==='ally_name')
+		return 'Ally Name';
 
 	return value;
 }
@@ -195,11 +199,17 @@ function adena(count) {
 
 function loginMenu() {
 	var account = Cookies.get('account');
-	$("#login").html("");
+	var login = $("#login");
+	var login_menu = $("#loginMenu").clone();
+	var account_menu = $("#accountMenu").clone();
+
+	login.html("");
+	account_menu.find('a').html(account);
+
 	if(account)
-		$("#login").html('<a href="/cp.html">'+account+'</a>');
+		login.html( account_menu );
 	else
-		$("#login").append( $("#loginMenu").clone() );
+		login.append( login_menu );
 }
 
 function logout() {
@@ -248,10 +258,11 @@ function logined(data, newone)
 }
 
 function response(text, data) {
-	$('.page-content .alertResponse').remove();
-	$('.page-content').prepend($("#alertResponse").clone());
-	$('.page-content .alertResponse').html(text);
-	$('.page-content .alertResponse').append(getError(data));
+	$('#alert-message .alertResponse').remove();
+	$('#alert-message').prepend($("#alertResponse").clone());
+	$('#alert-message .alertResponse').html(text);
+	$('#alert-message .alertResponse').append(getError(data));
+	$('#alert-message').removeClass('d-none');
 }
 
 function getPage(el,scroll) 
@@ -266,6 +277,14 @@ function getPage(el,scroll)
 
 	changeUrl(link);
 
+	if(!isHome(link)) 
+	{
+		$("#header-menu").remove();
+		$(".f-menu").remove();
+	}
+
+	$('#alert-message').addClass('d-none');
+
 	/*if(scroll)
 		$('html, body').animate({
 	        scrollTop: $('#content').offset().top
@@ -279,9 +298,13 @@ function putContent(data)
 	afterUpdate();
 }
 
+function isHome(link) {
+	return link === 'home.html' || link === '' || link === '/';
+}
+
 function changeBackground(link) 
 {
-	if(link === 'home.html' || link === '' || link === '/') 
+	if( isHome(link) ) 
 	{
 		$("body").removeClass("body-dark");
 		$("body").addClass("body-general");
@@ -407,7 +430,7 @@ function makeTable(table, data, settings) {
 
 	  var tr = $('<tr class="text-muted">');
 	  $.each(columns, function(key, value) {
-	    $('<th>').html(replaceTableTh(value)).appendTo(tr);
+	    $('<th class="border-0">').html(replaceTableTh(value)).appendTo(tr);
 	  });
 	  thead.append(tr);
 }
@@ -433,6 +456,8 @@ function makeModal(el, button) {
 	$(button).attr('data-toggle', 'modal');
 	$(button).attr('data-target', '#'+modal_id);
 	$(button).removeAttr('onclick');
+
+	$(el).remove();
 
 	afterUpdate();
 
@@ -506,11 +531,78 @@ function getUserInfo(table)
 		if(!data.data)
 			return;
 
-		makeTable(table, data.data);
+		makeTable(table, data.data, {
+			removeCol: ['clanid']
+		});
 	});
 }
 
-function getPlayersInfo(table, modal) 
+function makePlayersWealthModal(table, modal, data) 
+{
+	var modal_table = $(modal).find('table');
+	var modal_button = $(table).parent().find('a');
+
+	makeTable(
+		modal_table, 
+		data, 
+		{
+			numeration: true,
+			removeCol: ['clanid', 'count']
+		}
+	);
+
+	modal_table.removeClass('d-none');
+
+	var modal_id = makeModal(modal, modal_button);
+	$('#'+modal_id).find('.modal-dialog').addClass('modal-lg');
+}
+
+function getPlayersWealth(table, modal) 
+{
+	$.getJSON(link.getWealth, function( data ) 
+	{
+		if(!data.data)
+			return;
+
+		data = sortBy(data.data, 'count');
+
+		makeTable(
+			table, 
+			data, 
+			{
+				limit: 7,
+				numeration: true,
+				removeCol: ['clanid', 'count']
+			}
+		);
+
+		$(table).removeClass('d-none');
+
+		makePlayersWealthModal(table, modal, data);
+	});
+}
+
+function makePlayersPVPModal(table, modal, data) 
+{
+	var modal_table = $(modal).find('table');
+	var modal_button = $(table).parent().find('a');
+
+	makeTable(
+		modal_table, 
+		data, 
+		{
+			numeration: true,
+			removeCol: ['account_name', 'charId', 'onlinetime']
+		}
+	);
+
+	modal_table.removeClass('d-none');
+
+	var modal_id = makeModal(modal, modal_button);
+	$('#'+modal_id).find('.modal-dialog').addClass('modal-lg');
+}
+
+function getPlayersPVP(table, modal) 
 {
 	$.getJSON(link.getPlayersInfo, function( data ) 
 	{
@@ -531,42 +623,51 @@ function getPlayersInfo(table, modal)
 
 		$(table).removeClass('d-none');
 
-		var modal_table = $(modal).find('table');
-		var modal_button = $(table).parent().find('a');
-
-		makeTable(
-			modal_table, 
-			data, 
-			{
-				numeration: true,
-				removeCol: ['account_name', 'charId', 'onlinetime']
-			}
-		);
-
-		modal_table.removeClass('d-none');
-
-		var modal_id = makeModal(modal, modal_button);
-		$('#'+modal_id).find('.modal-dialog').addClass('modal-lg');
+		makePlayersPVPModal(table, modal, data);
 	});
 }
 
-function getClansInfo(table) 
+function makeClansModal(table, modal, data) 
+{
+	var modal_table = $(modal).find('table');
+	var modal_button = $(table).parent().find('a');
+
+	makeTable(
+		modal_table, 
+		data, 
+		{
+			numeration: true,
+			removeCol: ['leader_id']
+		}
+	);
+
+	modal_table.removeClass('d-none');
+
+	var modal_id = makeModal(modal, modal_button);
+	$('#'+modal_id).find('.modal-dialog').addClass('modal-lg');
+}
+
+function getClansInfo(table, modal) 
 {
 	$.getJSON(link.getClansInfo, function( data ) {
 		if(!data.data)
 			return;
 
+		data = sortBy(data.data, 'reputation_score');
+
 		makeTable(
 			table, 
-			data.data,
+			data,
 			{
 				limit: 7,
 				numeration: true,
-				removeCol: ['ally_name', 'leader_id']
+				removeCol: ['leader_id']
 			}
 		);
 
 		$(table).removeClass('d-none');
+
+		makeClansModal(table, modal, data);
 	});
 }
 
