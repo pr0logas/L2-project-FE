@@ -17,6 +17,10 @@ $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownErr
   response(xhr.responseText + ' - ' + btoa(ajaxOptions.url));
 });
 
+function adeRatio() {
+	return 10000;
+}
+
 function submitForm(el) 
 {
 	response('Loading, please wait...');
@@ -190,7 +194,7 @@ function replaceTableTd(key, value)
 }
 
 function adenaToAdeptio(count) {
-	return numberWithSpaces(round(count / 10000, 0));
+	return numberWithSpaces(round(count / adeRatio(), 0));
 }
 
 function adena(count) {
@@ -718,13 +722,89 @@ function changeSelectAccount(select)
 
 	$.getJSON(link.getUserInfo + Cookies.get('account'), function( data ) 
 	{
-		$(select).html("");
+		$(select).html("<option></option>");
 		if(data.data)
 			$.each(data.data, function(i, row) 
 			{
 			  $(select).append('<option value="'+row.charId+'">'+row.char_name+'</option>');
 			});
 	});
+}
+
+function selectedCharacter(el) 
+{
+	var selected_option = $(el).find('option:selected');
+
+	if( selected_option.attr('count') > 0 )
+		return;
+
+	$.getJSON(link.getMoneyCount + $(el).val(), function( data ) 
+	{
+		var count = 0;
+		if(data.data)
+			$.each(data.data, function(i, row) 
+			{
+			  count += row.count;
+			});
+
+		selected_option.attr('count', count);
+
+		formAdenaAdeptio(el);
+	});
+}
+
+function formAdenaAdeptio(el) 
+{
+	var form = $(el).parent().parent();
+	var count = form.find('select option:selected').attr('count');
+	var input = form.find('input').first();
+
+	var min = adeRatio();
+	var max = count;
+
+	input.attr('min', min);
+	input.attr('max', max);
+
+	input = input.val();
+
+	form.find('.loseAdena').html(numberWithSpaces(input) + ' Adena');
+	form.find('.getAdeptio').html(numberWithSpaces(input / adeRatio()) + ' Adeptio');
+	form.find('.minAdena').html(numberWithSpaces(min) + ' Adena');
+	form.find('.maxAdena').html(numberWithSpaces(max) + ' Adena');
+}
+
+function formContinueButton(el) 
+{
+	var form = $(el).parent();
+
+	if( !form.find('select').val() )
+		return;
+
+	var first_input = form.find('input').first();
+
+	if( !first_input.parent().hasClass('d-none') ) 
+	{
+		var count = parseFloat(first_input.val());
+		var min = parseFloat(first_input.attr('min'));
+		var max = parseFloat(first_input.attr('max'));
+
+		if( !count || (count < min) || (count > max) )
+
+			return;
+	}
+
+	var el_hide = form.find('.form-group.d-none');
+
+	if( el_hide.length > 0 ) 
+	{
+		el_hide.first().removeClass('d-none');
+
+		if( el_hide.length > 1 )
+			return;
+	}
+
+	$(el).parent().find('button.d-none').removeClass('d-none');
+	$(el).addClass('d-none');
 }
 
 function numberWithSpaces(x) {
