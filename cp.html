@@ -144,18 +144,19 @@
           <form class="p-3">
             <div class="form-group">
               <label for="formowner">Select Character</label>
-              <select class="form-control" id="formowner" name="owner" required></select>
+              <select class="form-control" id="formowner" name="owner" required onchange="selectedCharacter(this);"></select>
             </div>
-            <div class="form-group">
-              <label for="formcount1">Amount</label>
-              <input type="number" class="form-control" id="formcount1" placeholder="0" name="count" required>
+            <div class="form-group d-none">
+              <label for="formcount1">Enter amount of Adena you want to convert</label>
+              <input type="number" class="form-control" id="formcount1" placeholder="Amount of Adena" name="count" required>
             </div>
-            <div class="form-group">
+            <div class="form-group d-none">
               <label for="formpassword">Password</label>
-              <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
+              <input type="password" class="form-control" id="formpassword" placeholder="Password" name="token" required>
             </div>
             <input type="hidden" style="display: none;" name="account">
-            <button type="submit" class="btn btn-danger btn-block" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/buyAdena">Convert to Adena</button>
+            <button class="btn btn-danger btn-block" onclick="formContinueButton(this);">Continue</button>
+            <button type="submit" class="btn btn-danger btn-block d-none" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/buyAdena">Convert to Adena</button>
             <button type="submit" class="btn btn-danger btn-block" name="action" style="display: none;"> </button>
           </form>
         </div>
@@ -307,18 +308,19 @@
           <form class="p-3">
             <div class="form-group">
               <label for="formowner">Select Character</label>
-              <select class="form-control" id="formowner" name="owner" required></select>
+              <select class="form-control" id="formowner" name="owner" required onchange="selectedCharacter(this);"></select>
             </div>
-            <div class="form-group">
-              <label for="formcount1">Amount</label>
-              <input type="number" class="form-control" id="formcount1" placeholder="0" name="count" required>
+            <div class="form-group d-none">
+              <label for="formcount1">Enter amount of Adena you want to convert</label>
+              <input type="number" class="form-control" id="formcount1" placeholder="Amount of Adena" name="count" required>
             </div>
-            <div class="form-group">
+            <div class="form-group d-none">
               <label for="formpassword">Password</label>
-              <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
+              <input type="password" class="form-control" id="formpassword" placeholder="Password" name="token" required>
             </div>
             <input type="hidden" style="display: none;" name="account">
-            <button type="submit" class="btn btn-danger btn-block" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/buyAdena">Convert to Adena</button>
+            <button class="btn btn-danger btn-block" onclick="formContinueButton(this);">Continue</button>
+            <button type="submit" class="btn btn-danger btn-block d-none" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/buyAdena">Convert to Adena</button>
             <button type="submit" class="btn btn-danger btn-block" name="action" style="display: none;"> </button>
           </form>
         </div>
