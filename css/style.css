@@ -8,11 +8,15 @@ body {
   line-height: 1;
 }
 .body-general {
-  background: url(../images/bg-head.png) center top no-repeat, url(../images/bg-foot.jpg) center bottom no-repeat;
+  background: url(../images/bg-head.min.png) center top no-repeat, url(../images/bg-foot.min.png) center bottom no-repeat;
   background-size: 100% auto;
 }
 .body-dark {
-  background: url(../images/bg-dark.png) center top no-repeat, url(../images/bg-foot.jpg) center bottom no-repeat;
+  background: url(../images/bg-dark.min.png) center top no-repeat, url(../images/bg-foot.jpg) center bottom no-repeat;
+  background-size: 100% auto;
+}
+.body-started {
+  background: url(../images/bg-started.min.png) center top no-repeat, url(../images/bg-foot.jpg) center bottom no-repeat;
   background-size: 100% auto;
 }
 a {
