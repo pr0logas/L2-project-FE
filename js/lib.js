@@ -306,11 +306,17 @@ function changeBackground(link)
 {
 	if( isHome(link) ) 
 	{
-		$("body").removeClass("body-dark");
+		$("body").removeClass("body-dark").removeClass("body-started");
 		$("body").addClass("body-general");
 		return;
 	}
-	$("body").removeClass("body-general");
+	if( link === '/getstarted.html' || link === 'getstarted.html' ) 
+	{
+		$("body").removeClass("body-dark").removeClass("body-general");
+		$("body").addClass("body-started");
+		return;
+	}
+	$("body").removeClass("body-general").removeClass("body-started");
 	$("body").addClass("body-dark");
 }
 
