@@ -26,8 +26,12 @@ $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownErr
 	$('form').attr('loading', 'false');
 });
 
-function adeRatio() {
-	return 10000;
+function AdenaToAdeptioRatio() {
+	return 10000; // adena to adeptio
+}
+
+function AdeptioToAdenaRatio() {
+	return 6000; // adeptio to adena
 }
 
 function submitForm(el) 
@@ -209,7 +213,7 @@ function replaceTableTd(key, value)
 }
 
 function adenaToAdeptio(count) {
-	return numberWithSpaces(round(count / adeRatio(), 0));
+	return numberWithSpaces(round(count / AdenaToAdeptioRatio(), 0));
 }
 
 function adena(count) {
@@ -813,7 +817,7 @@ function formAdenaAdeptio(el)
 	var input = form.find('input').first();
 	var input_val = input.val();
 
-	var min = adeRatio();
+	var min = AdeptioToAdenaRatio();
 	var max = count;
 	var adeptio = parseFloat($('#getAdeptioUserInfo').text());
 
@@ -822,10 +826,10 @@ function formAdenaAdeptio(el)
 		min = 1;
 		max = adeptio;
 
-		form.find('.loseAdena').html(numberWithSpaces(input_val / adeRatio()) + ' Adeptio');
+		form.find('.loseAdena').html(numberWithSpaces(input_val / AdeptioToAdenaRatio()) + ' Adeptio');
 		form.find('.getAdeptio').html(numberWithSpaces(input_val) + ' Adena');
-		form.find('.minAdena').html(numberWithSpaces(min) * adeRatio() + ' Adena');
-		form.find('.maxAdena').html(numberWithSpaces(max) * adeRatio() + ' Adena');
+		form.find('.minAdena').html(numberWithSpaces(min) * AdeptioToAdenaRatio() + ' Adena');
+		form.find('.maxAdena').html(numberWithSpaces(max) * AdeptioToAdenaRatio() + ' Adena');
 
 		return;
 	}
@@ -834,7 +838,7 @@ function formAdenaAdeptio(el)
 	input.attr('max', max);
 
 	form.find('.loseAdena').html(numberWithSpaces(input_val) + ' Adena');
-	form.find('.getAdeptio').html(numberWithSpaces(input_val / adeRatio()) + ' Adeptio');
+	form.find('.getAdeptio').html(numberWithSpaces(input_val / AdenaToAdeptioRatio()) + ' Adeptio');
 	form.find('.minAdena').html(numberWithSpaces(min) + ' Adena');
 	form.find('.maxAdena').html(numberWithSpaces(max) + ' Adena');
 }
