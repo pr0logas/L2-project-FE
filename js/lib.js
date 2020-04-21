@@ -303,7 +303,7 @@ function putContent(data)
 }
 
 function isHome(link) {
-	return link === 'home.html' || link === '' || link === '/';
+	return link === 'home.html' || link === '/home.html' || link === '' || link === '/';
 }
 
 function changeBackground(link) 
@@ -335,6 +335,11 @@ function getLink(el)
 
 	if(typeof el === 'object')
 		el = $(el).attr('href');
+
+	var be= '/index.html';
+
+	if( el.indexOf("/") < 0 )
+		el = '/' + el;
 
 	return el;
 }
