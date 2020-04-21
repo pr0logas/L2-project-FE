@@ -906,7 +906,12 @@ function inArray(needle,haystack)
 function scrollDown(el) {
 	$('html, body').animate({
         scrollTop: $(el).offset().top
-    }, 1000);
+        
+    }, 1000, function(){
+
+    // Add hash (#) to URL when done scrolling (default click behavior)
+    window.location.hash = el;
+  });
 }
 
 function sha1(str) {
