@@ -43,7 +43,7 @@
                 You have <span id="getUserMoneyCount">?</span> Adena
               </div>
               <div class="col-6"> 
-                You can get ~<span id="getUserMoneyCountAdeptio">?</span> Adeptio
+                You can get ~<span id="getUserMoneyCountAdeptio">?</span> Adeptio Coin
               </div>
             </div>
 
@@ -81,12 +81,12 @@
 
             <div class="pb-4">
               <img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png">
-             <h2 class="d-inline">Your Adeptio</h2>
+             <h2 class="d-inline">Your Adeptio Coin</h2>
            </div>
 
            <div class="row pb-4">
               <div class="col-6"> 
-                You have <span id="getAdeptioUserInfo">?</span> Adeptio
+                You have <span id="getAdeptioUserInfo">?</span> Adeptio Coin
                 
               </div>
               <div class="col-6"> 
@@ -95,7 +95,7 @@
             </div>
 
             <a class="btn btn-primary btn-block mb-4" href="#" role="button" onclick="makeModal('#convertAdeptioModal', this)">
-              Convert Adeptio
+              Convert Adeptio Coin
             </a>
 
              <div class="row">
@@ -104,7 +104,7 @@
 
                 <div>
                     <a class="btn btn-danger btn-block" href="#" role="button" onclick="makeModal('#getAdeptioModal', this)">
-                      Get Adeptio
+                      Get Adeptio Coin
                     </a>
                 </div>
 
@@ -114,7 +114,7 @@
 
                 <div>
                     <a class="btn btn-success btn-block" href="#" role="button" onclick="makeModal('#sellAdeptioModal', this)">
-                      Sell Adeptio
+                      Sell Adeptio Coin
                     </a>
                 </div>
 
@@ -260,7 +260,7 @@
   </div>
 
   <div id="getAdeptioModal">
-    <div type="modal-title"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Get Adeptio</div>
+    <div type="modal-title"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Get Adeptio Coin</div>
     <div type="modal-body">
       <!--
       <div type="accordion">
@@ -317,13 +317,13 @@
             </div>
             <input type="hidden" style="display: none;" name="account">
             <input type="hidden" style="display: none;" name="wlt" id="depositAdeptiowlt">
-            <button type="submit" class="btn btn-danger btn-block" id="depositAdeptio" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptio" response="depositAdeptioResponse">Get Adeptio</button>
+            <button type="submit" class="btn btn-danger btn-block" id="depositAdeptio" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptio" response="depositAdeptioResponse">Get Adeptio Coin</button>
             <button type="submit" class="btn btn-danger btn-block d-none" id="depositAdeptioApproval" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/depositAdeptioApproval">Deposit Approval</button>
           </form>
         </div>
       </div>
       <div type="accordion">
-        <div type="accordion-title"><i class="fas fa-dollar-sign"></i> Buy Adeptio</div>
+        <div type="accordion-title"><i class="fas fa-dollar-sign"></i> Buy Adeptio Coin</div>
         <div type="accordion-body">
           <a href="https://wiki.adeptio.cc/books/l2-adeptio-how-in-game-economic-works/page/how-to-buy-adena#bkmrk-step-by-step%3A" target="_blank">Buy from Exchange</a>
         </div>
@@ -332,7 +332,7 @@
   </div>
 
   <div id="sellAdeptioModal">
-    <div type="modal-title"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Sell Adeptio</div>
+    <div type="modal-title"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Sell Adeptio Coin</div>
     <div type="modal-body">
       <!--
       <div type="accordion">
@@ -388,7 +388,7 @@
               <input type="password" class="form-control" id="formpassword" placeholder="password" name="token" required>
             </div>
             <input type="hidden" style="display: none;" name="account">
-            <button type="submit" class="btn btn-success btn-block" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/withdrawAdeptio" response="withdrawAdeptioResponse">Withdraw Adeptio</button>
+            <button type="submit" class="btn btn-success btn-block" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/withdrawAdeptio" response="withdrawAdeptioResponse">Withdraw Adeptio Coin</button>
             <button type="submit" class="btn btn-danger btn-block" name="action" style="display: none;"> </button>
           </form>
         </div>
@@ -409,7 +409,7 @@
   </div>
 
   <div id="convertAdeptioModal">
-    <div type="modal-title"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Convert Adeptio</div>
+    <div type="modal-title"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png"> Convert Adeptio Coin</div>
     <div type="modal-body">
       <div type="accordion">
         <div type="accordion-title"><img src="https://l2wiki.com/images/3/34/Item_57.jpg" height="21px"> To Adena</div>
@@ -476,7 +476,7 @@
             </div>
             <input type="hidden" style="display: none;" name="account">
             <button class="btn btn-danger btn-block" onclick="formContinueButton(this);">Continue</button>
-            <button type="submit" class="btn btn-danger btn-block d-none" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/sellAdena">Convert to Adeptio</button>
+            <button type="submit" class="btn btn-danger btn-block d-none" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/sellAdena">Convert to Adeptio Coin</button>
             <button type="submit" class="btn btn-danger btn-block" name="action" style="display: none;"> </button>
           </form>
         </div>
@@ -488,7 +488,7 @@
     <div type="modal-title"><img src="//l2wiki.com/images/3/34/Item_57.jpg"> Convert Adena</div>
     <div type="modal-body">
       <div type="accordion">
-        <div type="accordion-title"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png" height="21px"> To Adeptio</div>
+        <div type="accordion-title"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png" height="21px"> To Adeptio Coin</div>
         <div type="accordion-body">
           <form class="p-3" data-type="sell">
             <div class="form-group">
@@ -517,13 +517,13 @@
             </div>
             <input type="hidden" style="display: none;" name="account">
             <button class="btn btn-danger btn-block" onclick="formContinueButton(this);">Continue</button>
-            <button type="submit" class="btn btn-danger btn-block d-none" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/sellAdena">Convert to Adeptio</button>
+            <button type="submit" class="btn btn-danger btn-block d-none" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/sellAdena">Convert to Adeptio Coin</button>
             <button type="submit" class="btn btn-danger btn-block" name="action" style="display: none;"> </button>
           </form>
         </div>
       </div>
       <div type="accordion">
-        <div type="accordion-title"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png" height="21px"> From Adeptio</div>
+        <div type="accordion-title"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png" height="21px"> From Adeptio Coin</div>
         <div type="accordion-body">
           <form class="p-3" data-type="sell">
             <div class="form-group">
@@ -552,7 +552,7 @@
             </div>
             <input type="hidden" style="display: none;" name="account">
             <button class="btn btn-danger btn-block" onclick="formContinueButton(this);">Continue</button>
-            <button type="submit" class="btn btn-danger btn-block d-none" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/sellAdena">Convert to Adeptio</button>
+            <button type="submit" class="btn btn-danger btn-block d-none" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/sellAdena">Convert to Adeptio Coin</button>
             <button type="submit" class="btn btn-danger btn-block" name="action" style="display: none;"> </button>
           </form>
         </div>
