@@ -13,6 +13,11 @@
 $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownError) {
 	//console.log(event.target);
 	//console.log(event.target.activeElement);
+	if( $('body').attr('loading-page') === 'true' ) 
+	{
+		getPage('home.html');
+		return true;
+	}
 	$('form').find('button').removeAttr('disabled');
   response(xhr.responseText + ' - ' + btoa(ajaxOptions.url));
 });
@@ -273,10 +278,13 @@ function getPage(el,scroll)
 {
 	var link = getLink(el);
 
+	$('body').attr("loading-page", "true");
+
 	$.get(link, function( data ) {
 	  putContent(data);
 	  changeBackground(link);
 	  $(el).attr("loading", "false");
+	  $('body').attr("loading-page", "false");
 	});
 
 	changeUrl(link);
