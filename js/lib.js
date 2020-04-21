@@ -177,7 +177,7 @@ function getError(data)
 }
 
 function USDandBTCformat(usd, btc) {
-	//return '$ ' + usd + ' USD or ' +  '<img src="images/Bitcoin.png" height="24" width="24">' + ' ' + btc + ' BTC';
+	//return '$ ' + usd + ' USD or ' +  '<img src="/images/Bitcoin.png" height="24" width="24">' + ' ' + btc + ' BTC';
 	return btc + ' BTC';
 }
 
@@ -231,6 +231,12 @@ function checkLogin() {
 		return true;
 	getPage('login.html');
 	loginMenu();
+}
+
+function isLogged() {
+	if(Cookies.get('account'))
+		return true;
+	return false;
 }
 
 function adeptioToUSD(id, count) {
@@ -353,9 +359,7 @@ function getLink(el)
 			return '/home.html';
 
 		path = path.replace("/page/", "");
-		path = '/'+path+'.html';
-
-		return path;
+		el = '/'+path+'.html';
 	}
 
 	if(typeof el === 'object')
@@ -363,6 +367,9 @@ function getLink(el)
 
 	if( el.indexOf("/") < 0 )
 		el = '/' + el;
+
+	if( el.indexOf("/cp.html") >= 0 && !isLogged() )
+		el = '/login.html';
 
 	return el;
 }
