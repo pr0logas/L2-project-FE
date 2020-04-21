@@ -18,8 +18,12 @@ $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownErr
 		getPage('home.html');
 		return true;
 	}
+
 	$('form').find('button').removeAttr('disabled');
-  response(xhr.responseText + ' - ' + btoa(ajaxOptions.url));
+
+	response(xhr.responseText + ' - ' + btoa(ajaxOptions.url));
+
+	$('form').attr('loading', 'false');
 });
 
 function adeRatio() {
@@ -28,7 +32,12 @@ function adeRatio() {
 
 function submitForm(el) 
 {
+	if( $(el).attr('loading') === 'true' )
+		return;
+
 	response('Loading, please wait...');
+
+	$(el).attr('loading', 'true');
 
 	$(el).find('button').attr('disabled','disabled');
 
@@ -38,6 +47,7 @@ function submitForm(el)
 	    timeout: 120 * 1000,
 	    success: function(data)
 		{
+			$(el).attr('loading', 'false');
 			//$('.modal').modal('hide');
 
 			$(el).find('button').removeAttr('disabled');
@@ -906,7 +916,7 @@ function inArray(needle,haystack)
 function scrollDown(el) {
 	$('html, body').animate({
         scrollTop: $(el).offset().top
-        
+
     }, 1000, function(){
 
     // Add hash (#) to URL when done scrolling (default click behavior)
