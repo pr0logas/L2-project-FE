@@ -751,7 +751,7 @@ function getAdeptioUserInfo(adeptio, usd) {
 		changeFormat = numberWithSpaces(round(count, 0));
 
 		$(adeptio).html(changeFormat);
-		//adeptioToUSD(usd, count);
+		adeptioToUSD(usd, count);
 	});
 }
 
