@@ -12,11 +12,15 @@ body {
   background-size: 100% auto;
 }
 .body-dark {
-  background: url(../images/bg-dark.min.png) center top no-repeat, url(../images/bg-foot.jpg) center bottom no-repeat;
+  background: url(../images/bg-dark.min.png) center top no-repeat;
   background-size: 100% auto;
 }
 .body-started {
-  background: url(../images/bg-started.min.png) center top no-repeat, url(../images/bg-foot.jpg) center bottom no-repeat;
+  background: url(../images/bg-started.min.png) center top no-repeat;
+  background-size: 100% auto;
+}
+.body-players {
+  background: url(../images/bg-players.min.png) center bottom no-repeat;
   background-size: 100% auto;
 }
 a {
@@ -644,8 +648,20 @@ button {
   background-color: #1C140F !important;
 }
 
+.bg-blur-glass {
+  background-color: rgba(39,50,49, 0.9);
+}
+
 .text-brown {
   color: #BC7657 !important;
+}
+
+.minw-800 {
+  min-width: 800px;
+}
+
+.minw-264 {
+  min-width: 264px;
 }
 
 .half-box {
@@ -723,4 +739,8 @@ a.collapsed {
 
 .font-times {
   font-family: "Times New Roman", Times, serif;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }

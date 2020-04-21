@@ -308,12 +308,17 @@ function isHome(link) {
 
 function changeBackground(link) 
 {
+	var main = $("main#content").parent();
 	if( isHome(link) ) 
 	{
 		$("body").removeClass("body-dark").removeClass("body-started");
 		$("body").addClass("body-general");
+		main.removeClass("wrapper");
 		return;
 	}
+	 if( !main.hasClass("wrapper") ){
+	    main.addClass("wrapper");
+	 }
 	if( link === '/getstarted.html' || link === 'getstarted.html' ) 
 	{
 		$("body").removeClass("body-dark").removeClass("body-general");
@@ -580,7 +585,7 @@ function getPlayersWealth(table, modal)
 			table, 
 			data, 
 			{
-				limit: 7,
+				limit: 6,
 				numeration: true,
 				removeCol: ['clanid', 'count']
 			}
@@ -625,7 +630,7 @@ function getPlayersPVP(table, modal)
 			table, 
 			data, 
 			{
-				limit: 7,
+				limit: 6,
 				numeration: true,
 				removeCol: ['account_name', 'charId', 'onlinetime']
 			}
