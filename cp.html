@@ -439,6 +439,41 @@
           </form>
         </div>
       </div>
+      <div type="accordion">
+        <div type="accordion-title"><img src="https://l2wiki.com/images/3/34/Item_57.jpg" height="21px"> From Adena</div>
+        <div type="accordion-body">
+          <form class="p-3" data-type="sell">
+            <div class="form-group">
+              <label for="formowner">Select Character</label>
+              <select class="form-control" id="formowner" name="owner" required onchange="selectedCharacter(this);"></select>
+            </div>
+            <div class="form-group d-none">
+              <label for="formcount1">Enter amount of Adena you want to convert</label>
+              <input type="number" class="form-control" id="formcount1" placeholder="Amount of Adena" name="count" required onchange="formAdenaAdeptio(this)">
+              <div class="row">
+                <div class="col-6">
+                  <span class="text-muted">You lose: </span><span class="text-muted loseAdena"></span>
+                  <br>
+                  <span class="text-muted">You get: </span><span class="text-muted getAdeptio"></span>
+                </div>
+                <div class="col-6">
+                  <span class="text-muted">Min: </span><span class="text-muted minAdena"></span>
+                  <br>
+                  <span class="text-muted">Max: </span><span class="text-muted maxAdena"></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group d-none">
+              <label for="formpassword">Enter your password to confirm</label>
+              <input type="password" class="form-control" id="formpassword" placeholder="Password" name="token" required>
+            </div>
+            <input type="hidden" style="display: none;" name="account">
+            <button class="btn btn-danger btn-block" onclick="formContinueButton(this);">Continue</button>
+            <button type="submit" class="btn btn-danger btn-block d-none" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/sellAdena">Convert to Adeptio</button>
+            <button type="submit" class="btn btn-danger btn-block" name="action" style="display: none;"> </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 
