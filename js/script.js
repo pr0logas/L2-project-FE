@@ -4,7 +4,7 @@
 
 	loginMenu();
 
-	getPage('home.html');
+	getPage();
 
 	//startTime('#countdown')
 

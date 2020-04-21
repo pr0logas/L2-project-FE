@@ -329,14 +329,29 @@ function changeBackground(link)
 	$("body").addClass("body-dark");
 }
 
+function currentPath() 
+{
+	return window.location.pathname;
+}
+
 function getLink(el) 
 {
-	if(!el) return
+	if(!el) 
+	{
+		var path = currentPath();
+
+		if( path.indexOf("/page/") < 0 ) 
+
+			return '/home.html';
+
+		path = path.replace("/page/", "");
+		path = '/'+path+'.html';
+
+		return path;
+	}
 
 	if(typeof el === 'object')
 		el = $(el).attr('href');
-
-	var be= '/index.html';
 
 	if( el.indexOf("/") < 0 )
 		el = '/' + el;
@@ -355,7 +370,10 @@ function removeChilds(el, leave)
 
 function changeUrl(link) 
 {
-	//window.history.pushState('page2', 'Title', link);
+	link = link.replace("/", "");
+	link = link.replace(".html", "");
+	link = '/page/' + link;
+	window.history.pushState({urlPath:link},"",link);
 }
 
 function getAction(el) 
