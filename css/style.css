@@ -694,21 +694,36 @@ a.collapsed {
 }
 
 .custom-range::-webkit-slider-thumb {
-  background: #BC6640 !important;
-   width: 25px !important;
-   height: 25px !important;
+  cursor: pointer;
+  background: url('http://l2wiki.com/images/3/34/Item_57.jpg') !important;
+   width: 32px !important;
+   height: 32px !important;
+   border: 5px !important;
+   border-color: #BC6640 !important;
+   border-style: solid !important;
+   border-radius: 20px !important;
 }
 
 .custom-range::-moz-range-thumb {
-  background: #BC6640 !important;
-   width: 25px !important;
-   height: 25px !important;
+  cursor: pointer;
+  background: url('http://l2wiki.com/images/3/34/Item_57.jpg') !important;
+   width: 32px !important;
+   height: 32px !important;
+   border: 5px !important;
+   border-color: #BC6640 !important;
+   border-style: solid !important;
+   border-radius: 20px !important;
 }
 
 .custom-range::-ms-thumb {
-  background: #BC6640 !important;
-   width: 25px !important;
-   height: 25px !important; 
+  cursor: pointer;
+  background: url('http://l2wiki.com/images/3/34/Item_57.jpg') !important;
+   width: 32px !important;
+   height: 32px !important; 
+   border: 5px !important;
+   border-color: #BC6640 !important;
+   border-style: solid !important;
+   border-radius: 20px !important;
 }
 
 .custom-range::-webkit-slider-runnable-track {
