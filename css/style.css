@@ -695,7 +695,7 @@ a.collapsed {
 
 .custom-range::-webkit-slider-thumb {
   cursor: pointer;
-  background: url('http://l2wiki.com/images/3/34/Item_57.jpg') !important;
+  background: url('https://l2wiki.com/images/3/34/Item_57.jpg') !important;
    width: 32px !important;
    height: 32px !important;
    border: 5px !important;
@@ -706,7 +706,7 @@ a.collapsed {
 
 .custom-range::-moz-range-thumb {
   cursor: pointer;
-  background: url('http://l2wiki.com/images/3/34/Item_57.jpg') !important;
+  background: url('https://l2wiki.com/images/3/34/Item_57.jpg') !important;
    width: 32px !important;
    height: 32px !important;
    border: 5px !important;
@@ -717,7 +717,7 @@ a.collapsed {
 
 .custom-range::-ms-thumb {
   cursor: pointer;
-  background: url('http://l2wiki.com/images/3/34/Item_57.jpg') !important;
+  background: url('https://l2wiki.com/images/3/34/Item_57.jpg') !important;
    width: 32px !important;
    height: 32px !important; 
    border: 5px !important;
@@ -758,4 +758,36 @@ a.collapsed {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.mw-250 {
+  max-width: 250px;
+}
+
+.mw-240 {
+  max-width: 240px;
+}
+
+.color-green {
+  color: #05FFBC;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.toast {
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #111216;
+  color: #fff;
+  border: 1px solid #3C3C3C;
+  border-radius: 5px;
+  border-radius: 2px;
+  padding: 8px;
+  position: fixed;
+  z-index: 1;
+  left: 150px;
+  bottom: 3%;
+  font-size: 17px;
 }
