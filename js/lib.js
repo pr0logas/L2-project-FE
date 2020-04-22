@@ -110,7 +110,8 @@ function withdrawAdeptioResponse(data) {
 
 function changeOnline(el) 
 {
-	var online = '<i class="fas fa-circle text-success"></i> <span class=" font-weight-bold"> Online</span> <span class="text-brown">(Since 2020 03 27)</span></div><div class="col-4 text-right">';
+	//var online = '<i class="fas fa-circle text-success"></i> <span class=" font-weight-bold"> Online</span> <span class="text-brown">(Since 2020 03 27)</span></div><div class="col-4 text-right">';
+	var online = '<i class="fas fa-circle text-success"></i> <span class=" font-weight-bold"> Online</span> <span class="text-brown"></span></div><div class="col-4 text-right">';
 	var start = '<div class="row"><div class="col-8 ">';
 	var end = " Players</div></div>";
 
