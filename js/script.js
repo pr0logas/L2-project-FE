@@ -6,6 +6,8 @@
 
 	getPage();
 
+	getUserActivity();
+
 	//startTime('#countdown')
 
 });
