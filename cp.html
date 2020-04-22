@@ -525,7 +525,7 @@
       <div type="accordion">
         <div type="accordion-title"><img src="//raw.githubusercontent.com/adeptio-project/adeptio/master/logo/adeptio_icon(32).png" height="21px"> From Adeptio Coin</div>
         <div type="accordion-body">
-          <form class="p-3" data-type="sell">
+          <form class="p-3" data-type="buy">
             <div class="form-group">
               <label for="formowner">Select Character</label>
               <select class="form-control" id="formowner" name="owner" required onchange="selectedCharacter(this);"></select>
@@ -552,7 +552,7 @@
             </div>
             <input type="hidden" style="display: none;" name="account">
             <button class="btn btn-danger btn-block" onclick="formContinueButton(this);">Continue</button>
-            <button type="submit" class="btn btn-danger btn-block d-none" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/sellAdena">Convert to Adeptio Coin</button>
+            <button type="submit" class="btn btn-danger btn-block d-none" name="action" value="https://l2-corona-api.adeptio.cc/apiv1/buyAdena">Convert from Adeptio Coin</button>
             <button type="submit" class="btn btn-danger btn-block" name="action" style="display: none;"> </button>
           </form>
         </div>
