@@ -776,6 +776,10 @@ a.collapsed {
   cursor: pointer;
 }
 
+.rounded-pill {
+    border-radius: 50rem !important;
+}
+
 .toast {
   min-width: 250px;
   margin-left: -125px;
