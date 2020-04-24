@@ -333,6 +333,13 @@ function getPage(el,scroll)
 		$(".f-menu").remove();
 	}
 
+	if( isLogin(link) ) 
+	{
+		$("footer.footer").addClass('pt-0');
+	} else {
+		$("footer.footer").removeClass('pt-0');
+	}
+
 	$('#alert-message').addClass('d-none');
 
 	/*if(scroll)
@@ -352,6 +359,14 @@ function isHome(link) {
 	return link === 'home.html' || link === '/home.html' || link === '' || link === '/';
 }
 
+function isLogin(link) {
+	return link === 'login.html' || link === '/login.html';
+}
+
+function isGetStarted(link) {
+	return link === '/getstarted.html' || link === 'getstarted.html';
+}
+
 function changeBackground(link) 
 {
 	var main = $("main#content").parent();
@@ -365,7 +380,7 @@ function changeBackground(link)
 	 if( !main.hasClass("wrapper") ){
 	    main.addClass("wrapper");
 	 }
-	if( link === '/getstarted.html' || link === 'getstarted.html' ) 
+	if( isGetStarted(link) ) 
 	{
 		$("body").removeClass("body-dark").removeClass("body-general");
 		$("body").addClass("body-started");
