@@ -1,0 +1,73 @@
+			<h1 class="text-center pb-3 font-times">Registration closed</h1>
+
+			<div class="page-content box-clear smaller">
+			</div>
+
+				<div class="half-box text-center" id="accordionRegClosed">
+
+					<div id="regClosed">
+		
+						<div class="border border-primary rounded bg-brown-dark p-4 pl-5 pr-5">
+							<div class="pr-3 pl-3 pb-4">
+								Due to high amount of new accounts we have to close our registration for now.
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<a href="#collapseNotification" data-toggle="collapse" aria-expanded="true" role="button" aria-controls="collapseOne" class="collapsed">Get Notification when it’s Open</a>
+								</div>
+								<div class="col-6">
+									<a href="#collapseInvitation" data-toggle="collapse" aria-expanded="true" role="button" aria-controls="collapseOne" class="collapsed">I have an Invitation Code</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="border border-primary rounded bg-brown-dark p-3 pr-4 pl-4 collapse" id="collapseNotification" data-parent="#accordionRegClosed">
+							<form action="https://l2-api.adeptio.cc/apiv1/preregister" class="form-inline">
+								<div class="input-group form-group input-group-lg">
+									<div class="input-group-prepend">
+										<span class="input-group-text bg-white text-muted"><i class="fas fa-envelope"></i></span>
+									</div>
+									<input type="email" class="form-control" placeholder="E-mail" name="email" required>
+									
+								</div>
+								<input type="hidden" name="callback" value="notificationRensponse">
+								<div class="form-group btn-group-lg ml-4">
+									<button  type="submit" class="btn btn-danger login_btn pl-5 pr-5 rounded-pill">Notify me
+									</button>
+								</div>
+							</form>
+						</div>
+
+						<div class="border border-primary rounded bg-brown-dark p-3 pr-4 pl-4 collapse" id="collapseInvitation" data-parent="#accordionRegClosed">
+							<form action="https://l2-api.adeptio.cc/apiv1/register" class="form-inline">
+								<div class="form-group input-group-lg">
+									<input type="text" class="form-control" placeholder="Invitation Code" name="ref" required>
+								</div>
+								<input type="hidden" name="callback" value="invitationRensponse">
+								<div class="form-group btn-group-lg ml-4">
+									<button  type="submit" class="btn btn-danger login_btn pl-5 pr-5 rounded-pill">Continue
+									</button>
+								</div>
+							</form>
+						</div>
+
+					</div>
+
+					<div id="regClosedSuccess" class="border border-primary rounded bg-brown-dark p-4 pl-5 pr-5 d-none">
+							<i class="fas fa-check-circle fa-2x mb-2"></i><br>
+							You are on the list. We will keep you informed.
+					</div>
+				
+				</div>
+<script type="text/javascript">
+$('[data-toggle="collapse"]').on('click',function(e){
+    if ( $(this).parents('.accordion').find('.collapse.show') ){
+        var idx = $(this).index('[data-toggle="collapse"]');
+        if (idx == $('.collapse.show').index('.collapse')) {
+            // prevent collapse
+            e.stopPropagation();
+            e.preventDefault();
+        }
+    }
+});
+</script>
