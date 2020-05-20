@@ -21,9 +21,17 @@ $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownErr
 		return true;
 	}
 
+	var url = ajaxOptions.url;
+
 	$('form').find('button').removeAttr('disabled');
 
-	response(xhr.responseText + ' - ' + btoa(ajaxOptions.url));
+	if( url.indexOf("withdrawAdeptio") >= 0 && url.indexOf("apiv1") >= 0 )
+
+		response("Your withdrawal talking longer than expected. The transaction will proceed in the upcoming ~5 minutes. If any issues please, contact support.");
+
+	else
+
+		response(xhr.responseText + ' - ' + btoa(url));
 
 	$('form').attr('loading', 'false');
 });
