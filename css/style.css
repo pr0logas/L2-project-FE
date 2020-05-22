@@ -780,6 +780,14 @@ a.collapsed {
     border-radius: 50rem !important;
 }
 
+.bottom-center {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
 .toast {
   min-width: 250px;
   margin-left: -125px;
