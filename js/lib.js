@@ -883,6 +883,9 @@ function invitationRensponse(data) {
 		return;
 
 	getPage('getstarted.html');
+	setTimeout(function() {
+       $('#alert-message').addClass('d-none');
+    }, 50);
 }
 
 function checkToasts(toasts) 
